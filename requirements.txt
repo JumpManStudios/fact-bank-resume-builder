@@ -1,0 +1,13 @@
+# Python deps for the resume-builder render pipeline.
+#
+#   python3 -m venv .venv && source .venv/bin/activate
+#   pip install -r requirements.txt
+#
+# pypandoc_binary bundles a prebuilt pandoc binary (currently pandoc 3.9) inside
+# the wheel, so a fresh clone can render .docx with NO separate `brew install
+# pandoc`. template/render-resume.sh prefers a system pandoc if one is on PATH
+# (e.g. a newer brew build) and falls back to this bundled binary otherwise.
+#
+# Note: fix-bullet-spacing.py uses only the Python standard library — nothing to
+# install for it.
+pypandoc_binary==1.17

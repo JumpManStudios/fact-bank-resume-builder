@@ -1,0 +1,47 @@
+# ============================================================================
+# ACCOMPLISHMENT STORE — structured record of real, resume-worthy work.
+# ----------------------------------------------------------------------------
+# This is the DATA behind the bullets. It is deliberately structured (not prose) so it stays
+# machine-readable — e.g. for a future search/index tool over source/ — without reshaping.
+# /prep-sheet reads it to build per-resume interview cheat-sheets, and /tailor-resume can
+# consult it for evidence.
+#
+# RULES:
+#   - Every record needs a real `outcome`. Hard numbers in `metrics` where they exist.
+#   - NEVER invent a number. If unverified, put it in `confirm:` and go check the source.
+#   - `evidence` always points to where the receipts live (source/ summaries, ticket/PR #s, files).
+#   - Keep `bullet` resume-ready; keep `what_i_did` factual and specific.
+# ============================================================================
+
+accomplishments:
+
+  # Fictional example — delete once you've added your own real entries.
+  - id: checkout-service-decomposition
+    title: Decomposed a monolithic checkout flow into independently deployable services
+    bullet: >-
+      Led the decomposition of a monolithic checkout flow into four independently deployable
+      services, cutting deploy-blocking incidents and enabling the payments team to ship
+      independently of the catalog team.
+    what_i_did: >-
+      Mapped the existing checkout monolith's implicit service boundaries, designed the new
+      service contracts (REST + an internal event bus for order-state changes), and led a
+      phased strangler-fig migration so the monolith and new services ran side by side during
+      cutover with no full-system freeze.
+    outcome: >-
+      Payments and catalog teams now deploy independently; a change in one no longer requires
+      coordinating a release with the other.
+    metrics:
+      - "deploy-blocking incidents dropped from ~6/quarter to ~1/quarter"
+      - "migration completed over 3 phases with zero full-checkout outage"
+    confirm:
+      - "exact quarter-over-quarter incident count (pull from the incident tracker export)"
+    evidence:
+      - "source/session-summaries/2026/03/* (checkout decomposition planning + phase 1)"
+      - "modules: checkout-service, order-events-bus"
+    themes: [backend, distributed-systems, architecture]
+    good_for: [backend, senior, staff, architecture]
+    interview_notes: >-
+      The "led a real migration without breaking prod" story. Arc: monolith made independent
+      deploys impossible -> mapped boundaries and designed contracts -> phased strangler-fig
+      cutover -> two teams now ship independently. Good answer to "tell me about a system you
+      redesigned."
