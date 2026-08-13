@@ -14,7 +14,9 @@ async function main(): Promise<void> {
   if (args[0] === "--selftest") {
     const q = args.slice(1).join(" ") || "graphql";
     console.error(`repoRoot = ${corpus.repoRoot}`);
-    console.error(`backlog docs = ${corpus.backlog.size()} | accomplishments = ${corpus.accById.size}`);
+    console.error(
+      `backlog = ${corpus.backlog.size()} chunks from ${corpus.backlogText.size} files | accomplishments = ${corpus.accById.size}`,
+    );
     console.log(`\n=== search_backlog("${q}") ===\n${tools.searchBacklog(corpus, q, 5)}`);
     console.log(`\n=== search_accomplishments("${q}") ===\n${tools.searchAccomplishments(corpus, q, 5)}`);
     console.log(`\n=== find_evidence("${q}") ===\n${tools.findEvidence(corpus, q, 3)}`);
