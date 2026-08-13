@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "resume-curator": {
+      "command": "node",
+      "args": ["mcp/resume-curator/dist/index.js"]
+    }
+  }
+}
