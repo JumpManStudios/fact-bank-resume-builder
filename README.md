@@ -84,6 +84,7 @@ and `template/accomplishments.yaml`). Every resume, cover letter, and interview-
 | `interview-prep/` | Per-resume cheat sheets from `/prep-sheet`. |
 | `analysis/` | Ad-hoc gap analyses, not part of the generated workflow. |
 | `source/` | The private evidence layer — session summaries, work logs, historical resumes, certificates. See `source/README.md`. |
+| `mcp/resume-curator/` | Optional local MCP server that makes `source/` + `accomplishments.yaml` semantically searchable (offline TF-IDF, no keys/network). Dev tool — see `mcp/resume-curator/README.md`. |
 
 ## Workflow chain
 
@@ -94,6 +95,26 @@ and `template/accomplishments.yaml`). Every resume, cover letter, and interview-
 /cover-letter <jd.md>  → resumes/drafts/md/…{Company}-{Role}-CoverLetter-{date}.md, rendered .docx
 /prep-sheet <resume.md> → interview-prep/…-INTERVIEW-PREP-{date}.md
 ```
+
+## Queryable career record (optional MCP server)
+
+Beyond the static pipeline, `mcp/resume-curator/` is a small **read-only MCP server** that makes your
+whole career record *queryable* instead of something you re-read by hand. It builds an **offline TF-IDF**
+index at session start over `source/**`, `template/fact-bank.md`, and `template/accomplishments.yaml`,
+then exposes five tools to an agent: `search_backlog`, `get_summary`, `search_accomplishments`,
+`get_accomplishment`, and `find_evidence` (given a resume bullet, surface its backing evidence). No API
+keys, no network — it works air-gapped.
+
+```bash
+cd mcp/resume-curator
+npm install && npm run build       # compiles src/ -> dist/
+npm run selftest -- "graphql"      # smoke test, no MCP client needed
+```
+
+The repo-root `.mcp.json` registers it for Claude Code; restart/reconnect MCP to pick it up. In this
+skeleton `source/` is empty, so it builds an empty-but-functional index — fill in your own facts (or the
+worked example) and it has something to search. See `mcp/resume-curator/README.md` for details, including
+why its raw output stays private.
 
 ## License
 
