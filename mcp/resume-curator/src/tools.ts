@@ -24,14 +24,18 @@ export function searchBacklog(c: Corpus, query: string, limit = 8): string {
   const hits = c.backlog.search(query, limit);
   if (!hits.length) return `No backlog matches for: "${query}".`;
   const out = hits.map((h, i) => {
-    const text = c.backlogText.get(h.id) ?? "";
-    return `${i + 1}. [${h.score.toFixed(3)}] ${h.id}\n   ${snippet(text, query)}`;
+    const p = (h.meta.path as string | undefined) ?? h.id;
+    const heading = h.meta.heading as string | undefined;
+    const location = heading ? `${p} › ${heading}` : p;
+    const text = c.chunkText.get(h.id) ?? "";
+    return `${i + 1}. [${h.score.toFixed(3)}] ${location}\n   ${snippet(text, query)}`;
   });
   return `Top ${hits.length} backlog matches for "${query}":\n\n${out.join("\n\n")}`;
 }
 
 export function getSummary(c: Corpus, p: string): string {
-  const key = p.replaceAll(/[\\/]/g, "/").replace(/^\.?\//, "");
+  // Accept a plain path or a `path#section` chunk id — resolve to the whole file either way.
+  const key = p.replaceAll(/[\\/]/g, "/").replace(/^\.?\//, "").split("#")[0];
   let text = c.backlogText.get(key);
   let resolvedKey = key;
   if (text === undefined) {
