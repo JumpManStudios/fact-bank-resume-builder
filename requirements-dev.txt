@@ -1,0 +1,4 @@
+# Extra deps for running the test suite (tests/). Not needed to use the
+# workflow itself — see requirements.txt for that.
+-r requirements.txt
+pytest==8.3.3

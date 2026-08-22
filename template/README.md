@@ -128,6 +128,16 @@ a reconciled `.md` actually matches what the editor approved. You generally won'
 directly — `/apply-review` drives it — but see that command for the exact invocations if you
 want to run a step manually.
 
+### Tests (`tests/`)
+`fix-bullet-spacing.py` and `review-docx.py` are pure logic over `.docx` XML with no external
+state, so they're covered by unit tests in `tests/` that build minimal `.docx` fixtures in
+memory (no `python-docx` dependency, no real Word files on disk). Run them with:
+
+```
+pip install -r requirements-dev.txt
+pytest
+```
+
 ### Markdown gotcha (important)
 Always leave a **blank line between a bold sub-header and its bullet list**:
 
