@@ -9,16 +9,23 @@ This folder is the **source of truth** for building tailored resumes.
 | `fact-bank.md` | Master reusable bullets, grouped by theme. Pull facts from here — never invent. |
 | `skills-matrix.md` | Canonical "Technical Skills" lines + which to lead with by role type. |
 | `accomplishments.yaml` | Structured store of real, curated work (bullet + what-I-did + real metric + evidence pointers into `source/`). Feeds interview prep. |
-| `reference.docx` | **Pandoc style carrier** (the default). Not included in this skeleton — see the warning below for how to build one. |
+| `reference.docx` | **Pandoc style carrier** (the default). A small, generic carrier ships with this skeleton so rendering works out of the box — see the warning below before replacing it with your own. |
 
-> **⚠️ Building `reference.docx`:** don't build it by copying a submitted resume's `.docx` over
-> a blank one and stripping the text. Generators sometimes hard-set per-run formatting
-> overrides (e.g. explicitly forcing non-bold on every paragraph) that mask a bad
+The bundled default is intentionally plain: no embedded fonts, generic `{{placeholder}}` body
+text, Arial throughout. It's meant to prove the pipeline works, not to be anyone's final
+styling — swap in your own once you care what the rendered `.docx` actually looks like.
+
+> **⚠️ Building your own `reference.docx`:** don't build it by copying a submitted resume's
+> `.docx` over a blank one and stripping the text. Generators sometimes hard-set per-run
+> formatting overrides (e.g. explicitly forcing non-bold on every paragraph) that mask a bad
 > `docDefaults` in the underlying style — pandoc doesn't copy those per-run overrides, so a raw
 > copy can silently make all body text render bold (or otherwise wrong) once pandoc drives it.
 > Build `reference.docx` by generating a doc with sane default styles directly (Word's default
 > template, or a doc you've verified body text isn't relying on a per-run override), then edit
 > `word/styles.xml` inside it (docDefaults + the Heading1/2/3 styles) to match the look you want.
+> Once you have one you like, either overwrite `template/reference.docx` or point
+> `render-resume.sh` at it via its third argument or `$RESUME_REFERENCE_DOC` (see "Picking a
+> style carrier" below).
 
 ## Where resume files live
 

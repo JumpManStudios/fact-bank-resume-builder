@@ -141,10 +141,10 @@ that order matters.
 
 ## What's not included, on purpose
 
-- **No rendered `.docx`.** `template/reference.docx` (the pandoc style carrier) isn't shipped
-  with this skeleton — see the warning in `template/README.md` for why, and how to build your
-  own. Once you have one, `template/render-resume.sh` on either `.md` file here produces the
-  same rendered output a real application would use.
+- **No committed rendered `.docx`.** The skeleton ships a small, generic default
+  `template/reference.docx`, so `template/render-resume.sh` on either `.md` file here works out
+  of the box — the output just isn't pre-rendered and committed in this directory. See
+  `template/README.md` for how to swap in your own carrier for real styling.
 - **No "Closed" outcome.** This example stops at a drafted resume + cover letter, which is
   enough to prove the chain works. It doesn't pretend to a fake interview or offer outcome.
 - **No `.mcp.json` pointing here.** The root `.mcp.json` indexes the real `template/`/`source/`

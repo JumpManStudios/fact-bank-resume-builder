@@ -18,7 +18,7 @@ around one rule: **never invent a fact** — everything public-facing traces bac
 | `template/resume-template.md` | The `{{slot}}` skeleton `/tailor-resume` copies and fills. |
 | `template/cover-letter-template.md` | Structure, voice constraints, and skeleton for cover letters. `/cover-letter` reads it every run. Names which files are legitimate voice references and which are not. |
 | `template/accomplishments.yaml` | Structured store of curated real work (bullet + what-I-did + real metric + evidence pointer into `source/`) — feeds `/prep-sheet`. |
-| `template/reference.docx` | Pandoc style carrier for `.docx` rendering, not included in this skeleton. **Don't build it by copying a submitted resume over a blank doc** — see `template/README.md` for why (poisoned `docDefaults`). |
+| `template/reference.docx` | Pandoc style carrier for `.docx` rendering. Ships with a small, generic default so rendering works out of the box; swap in your own for personalized styling. **Don't build your own by copying a submitted resume over a blank doc** — see `template/README.md` for why (poisoned `docDefaults`). |
 | `resumes/drafts/md/` | **`.md` sources for in-progress applications always live here** — never loose in `resumes/drafts/`. The `.md` is always the source of truth; never hand-edit the rendered `.docx`. |
 | `resumes/drafts/` (root) | Rendered `.docx`/`.pdf` for in-progress applications — no `.md` files at this level. |
 | `resumes/in-review/` | Out with a human editor, if you use one. Rendered copies uploaded for review; the loop can go around more than once before anything ships. |
