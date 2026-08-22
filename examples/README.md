@@ -13,6 +13,33 @@ This directory mirrors the real repo's own layout (`template/`, `source/`, `job-
 "The evidence layer + MCP server" below, which is not narrated, it's real commands and their
 real output.
 
+## Running workflows against this example
+
+Treat `examples/` as the **workflow root** when asking an agent to reproduce a step. The
+command files use paths such as `template/fact-bank.md`, `source/`, and `interview-prep/`
+because normal use happens at the repository root. For this self-contained fixture, resolve
+those paths beneath `examples/` instead:
+
+| Command-file path | Worked-example path |
+|---|---|
+| `template/fact-bank.md` | `examples/template/fact-bank.md` |
+| `template/skills-matrix.md` | `examples/template/skills-matrix.md` |
+| `template/accomplishments.yaml` | `examples/template/accomplishments.yaml` |
+| `source/` | `examples/source/` |
+| `job-listings/` | `examples/job-listings/` |
+| `resumes/` | `examples/resumes/` |
+| `interview-prep/` | `examples/interview-prep/` |
+
+Claude Code slash commands do not automatically rebase these paths merely because their input
+is under `examples/`. State the workflow root explicitly with any agent. For example:
+
+```text
+Read CLAUDE.md and .claude/commands/prep-sheet.md. Treat examples/ as the workflow root,
+then follow the prep-sheet workflow with
+examples/resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260815.md
+as $ARGUMENTS. Keep generated output under examples/interview-prep/.
+```
+
 ## Why this exists
 
 The rest of this repo documents the workflow. This directory is the receipt: a real job
