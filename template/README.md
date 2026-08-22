@@ -112,14 +112,28 @@ a bundled one:
 - `brew install pandoc` (or `winget install --id JohnMacFarlane.Pandoc -e` on Windows) — a
   system install, which the wrapper will prefer if present.
 
-### Bullet-spacing cleanup (`fix-bullet-spacing.py`)
-Pandoc gives every bullet the document default paragraph spacing, so lists render spread out —
-something a human editor would otherwise tighten by hand every time. The fixer reproduces that
-cleanup automatically: within each bullet group it removes the spacing on every bullet **except
-the last**, so bullets sit flush and the only gap is after the last bullet of a group
-(separating it from the next section/sub-header). It's idempotent, touches only bullet
-paragraphs, and uses only the Python standard library. A single-bullet group keeps its trailing
-gap (its only bullet is also its last).
+### Post-render repairs (`fix-bullet-spacing.py`)
+Despite the name, this script runs two passes over every rendered file.
+
+**Bullet-spacing cleanup** (the original reason it exists). Pandoc gives every bullet the
+document default paragraph spacing, so lists render spread out — something a human editor would
+otherwise tighten by hand every time. The fixer reproduces that cleanup automatically: within
+each bullet group it removes the spacing on every bullet **except the last**, so bullets sit
+flush and the only gap is after the last bullet of a group (separating it from the next
+section/sub-header). It's idempotent and touches only bullet paragraphs. A single-bullet group
+keeps its trailing gap (its only bullet is also its last).
+
+**Content-type repair** (keeps Word able to open the file at all). `reference.docx` is a Google
+Docs export, and it embeds its fonts as plain `.ttf` parts declared via
+`<Default Extension="ttf" .../>`. Pandoc copies those font parts into its output but rebuilds
+`[Content_Types].xml` from its own template, which has no `ttf` entry — an OPC violation. The
+rendered package ends up with font parts that no content type declares, and Word refuses to open
+the whole document ("The file appears to be corrupted"), while Google Docs, LibreOffice,
+`pdftotext`, and most ATS parsers read it without complaint — so the breakage is invisible unless
+someone opens the `.docx` in Word specifically. The fixer restores any missing `<Default>`
+declaration; it's purely additive (never removes or rewrites an existing one) and idempotent.
+
+Both passes use only the Python standard library (`zipfile` + `xml.etree`).
 
 ### Reviewing an editor's returned .docx (`review-docx.py`)
 `/apply-review` uses this to read a returned `.docx`'s final text (Word tracked changes already

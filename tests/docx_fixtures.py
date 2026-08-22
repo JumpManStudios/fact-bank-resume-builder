@@ -50,18 +50,30 @@ def plain_paragraph(text):
     return f'<w:p><w:r><w:t xml:space="preserve">{text}</w:t></w:r></w:p>'
 
 
-def build_docx(path, paragraphs_xml, comments_xml=None):
-    """Write a minimal .docx to `path` with the given raw <w:p> XML fragments."""
+def build_docx(path, paragraphs_xml, comments_xml=None, content_types=None, extra_parts=None):
+    """Write a minimal .docx to `path` with the given raw <w:p> XML fragments.
+
+    `content_types` overrides the default [Content_Types].xml (e.g. to omit a
+    `ttf` Default entry for a content-type-repair test). `extra_parts` is a
+    {filename: bytes} map of additional zip entries (e.g. a fake embedded font).
+    """
     body = "".join(paragraphs_xml)
     document_xml = DOCUMENT_WRAPPER.format(body=body).encode("utf-8")
 
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
-        z.writestr("[Content_Types].xml", CONTENT_TYPES)
+        z.writestr("[Content_Types].xml", content_types if content_types is not None else CONTENT_TYPES)
         z.writestr("_rels/.rels", RELS)
         z.writestr("word/document.xml", document_xml)
         if comments_xml is not None:
             z.writestr("word/comments.xml", comments_xml)
+        for name, data in (extra_parts or {}).items():
+            z.writestr(name, data)
     return path
+
+
+def read_content_types(path):
+    with zipfile.ZipFile(path) as z:
+        return z.read("[Content_Types].xml").decode("utf-8")
 
 
 def comments_part(comments):

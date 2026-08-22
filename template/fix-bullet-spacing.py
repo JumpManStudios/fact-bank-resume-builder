@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
-Post-render bullet-spacing cleanup for pandoc-generated resume/cover-letter .docx.
+Post-render repairs for pandoc-generated resume/cover-letter .docx.
 
-Why this exists
----------------
+Two passes run over every rendered file: bullet-spacing cleanup (the original
+reason this script exists) and a content-type repair that keeps Word able to
+open the result at all. The filename predates the second pass.
+
+Why the bullet-spacing pass exists
+----------------------------------
 Pandoc renders every bullet as the "Compact" style with no explicit paragraph
 spacing, so each bullet inherits docDefaults `after=160` (8pt). That puts a gap
 after *every* bullet — including the last one in a group — leaving lists spread
@@ -25,6 +29,21 @@ Notes
   is the consistent behavior across sections.
 - Idempotent: re-running makes no further changes.
 
+Why the content-type pass exists
+--------------------------------
+`template/reference.docx` is a Google Docs export, and it embeds its fonts as
+plain `.ttf` parts declared by `<Default Extension="ttf" .../>`. Pandoc copies
+those font parts into its output but rebuilds `[Content_Types].xml` from its own
+template, which has no `ttf` entry. The rendered package therefore contains five
+font parts that no content type declares — an OPC violation. Word refuses the
+whole document with "The file appears to be corrupted," while Google Docs,
+LibreOffice, `pdftotext` and most ATS parsers read it without complaint, so the
+breakage is invisible unless someone opens the .docx in Word.
+
+The pass below restores any missing `<Default>` entry. It only ever adds
+declarations for extensions actually present in the package, never removes or
+rewrites existing ones, and is idempotent.
+
 Usage: fix-bullet-spacing.py <file.docx> [more.docx ...]
 """
 import os
@@ -34,10 +53,58 @@ import zipfile
 import xml.etree.ElementTree as ET
 
 W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+CONTENT_TYPES = "[Content_Types].xml"
+
+# Content types for the binary parts pandoc may copy out of a --reference-doc
+# without carrying over their <Default> declaration. Fonts are the ones that
+# actually bite here; the image entries are cheap insurance for the same class
+# of bug if a reference doc ever carries embedded images.
+EXT_CONTENT_TYPES = {
+    "ttf": "application/x-font-ttf",
+    "otf": "application/x-font-otf",
+    "odttf": "application/vnd.openxmlformats-officedocument.obfuscatedFont",
+    "png": "image/png",
+    "jpeg": "image/jpeg",
+    "jpg": "image/jpeg",
+    "gif": "image/gif",
+    "emf": "image/x-emf",
+    "wmf": "image/x-wmf",
+}
 
 
 def w(tag):
     return f"{{{W}}}{tag}"
+
+
+def repair_content_types(names, ct_xml):
+    """Declare any part extension the package uses but never declares.
+
+    Returns (new_bytes, [extensions_added]). Purely additive: existing Default
+    and Override entries are left exactly as they are.
+    """
+    text = ct_xml.decode("utf-8")
+    declared = {e.lower() for e in re.findall(r'<Default[^>]*Extension="([^"]+)"', text)}
+    overridden = {
+        p.lstrip("/").lower()
+        for p in re.findall(r'<Override[^>]*PartName="([^"]+)"', text)
+    }
+
+    added = []
+    for name in names:
+        if name.endswith("/") or name.lower() in overridden or "." not in name:
+            continue
+        ext = name.rsplit(".", 1)[-1].lower()
+        if ext in declared:
+            continue
+        ct = EXT_CONTENT_TYPES.get(ext)
+        if ct is None:
+            continue
+        declared.add(ext)
+        added.append(ext)
+        text = text.replace(
+            "</Types>", f'<Default Extension="{ext}" ContentType="{ct}"/></Types>', 1
+        )
+    return text.encode("utf-8"), added
 
 
 def register_ns(xml_bytes):
@@ -80,6 +147,11 @@ def tighten(p):
 def process_docx(path):
     with zipfile.ZipFile(path) as z:
         doc = z.read("word/document.xml")
+        names = z.namelist()
+        ct_xml = z.read(CONTENT_TYPES) if CONTENT_TYPES in names else None
+    new_ct, added_ct = (
+        repair_content_types(names, ct_xml) if ct_xml is not None else (None, [])
+    )
     register_ns(doc)
     root = ET.fromstring(doc)
     paras = root.find(w("body")).findall(w("p"))
@@ -108,10 +180,15 @@ def process_docx(path):
         tmp, "w", zipfile.ZIP_DEFLATED
     ) as zout:
         for item in zin.infolist():
-            data = new_doc if item.filename == "word/document.xml" else zin.read(item.filename)
+            if item.filename == "word/document.xml":
+                data = new_doc
+            elif item.filename == CONTENT_TYPES and new_ct is not None:
+                data = new_ct
+            else:
+                data = zin.read(item.filename)
             zout.writestr(item, data)
     os.replace(tmp, path)
-    return changed
+    return changed, added_ct
 
 
 def main(argv):
@@ -120,8 +197,14 @@ def main(argv):
         print("usage: fix-bullet-spacing.py <file.docx> ...", file=sys.stderr)
         return 2
     for f in files:
-        changed = process_docx(f)
-        print(f"[fix-bullet-spacing] {os.path.basename(f)}: tightened {changed} bullet(s)")
+        changed, added_ct = process_docx(f)
+        note = ""
+        if added_ct:
+            note = f"; declared missing content type(s): {', '.join(added_ct)}"
+        print(
+            f"[fix-bullet-spacing] {os.path.basename(f)}: "
+            f"tightened {changed} bullet(s){note}"
+        )
     return 0
 
 
