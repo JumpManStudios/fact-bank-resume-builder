@@ -45,6 +45,41 @@ interview-prep sheet is *generated* from them, never maintained by hand as a sep
 Not sure this actually produces something real? See **[`examples/`](examples/)** — one
 fictional job application walked through the entire chain, every artifact committed as proof.
 
+## Using another coding agent
+
+The workflow is not tied to Claude Code. The files in `.claude/commands/` are ordinary
+Markdown instructions; Claude Code's slash commands are a convenient way to discover and run
+them. An agent that can read and write repository files and run shell commands can follow the
+same process directly.
+
+- **Claude Code:** run a slash command, for example
+  `/prep-sheet resumes/drafts/md/Name-Company-Role-20260815.md`.
+- **Codex:** the root [`AGENTS.md`](AGENTS.md) supplies the project entry point. Ask Codex to
+  follow `.claude/commands/prep-sheet.md` with the resume path as its input.
+- **Another coding assistant:** ask it to read `CLAUDE.md` for the binding project rules, then
+  read the relevant `.claude/commands/<workflow>.md` file and follow it with your input path.
+  If the assistant does not automatically load project-instruction files, name both files in
+  your prompt.
+
+When reading a command file outside Claude Code, translate these conventions:
+
+- `$ARGUMENTS` means the path and optional notes supplied after the command name.
+- `description` and `argument-hint` frontmatter describe the command.
+- `allowed-tools` and names such as `Read`, `Write`, `Glob`, `Grep`, and `Bash` describe
+  capabilities. Use the equivalent file, search, and shell tools in your assistant.
+- `CLAUDE.md` is loaded automatically by Claude Code. Other assistants must read it explicitly
+  unless they support a repository instruction file such as `AGENTS.md`.
+
+For example, a client-neutral request is:
+
+```text
+Read CLAUDE.md and .claude/commands/prep-sheet.md. Follow the prep-sheet workflow with
+resumes/drafts/md/Name-Company-Role-20260815.md as $ARGUMENTS.
+```
+
+When exercising the fictional walkthrough, also say to treat `examples/` as the workflow
+root; [`examples/README.md`](examples/README.md) explains the path mapping.
+
 ## What's genuinely reusable here
 
 - **The fact-bank pattern** — one curated file selects and reframes bullets per role; nothing
