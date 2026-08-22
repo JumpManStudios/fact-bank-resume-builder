@@ -17,8 +17,8 @@ pass, and not a resume-writing exercise.
 
 ## Read first
 1. The job listing — all of it, not just Requirements. Read `## Flags` closely.
-2. `template/fact-bank.md` — the only source of truth for what's real. Never credit a strength
-   that isn't in there.
+2. `template/fact-bank.md` and `template/skills-matrix.md` — the source of truth for what's
+   real. Never credit a strength that isn't in one of them.
 3. `job-listings/PIPELINE.md` — check whether this company+role already has a row (don't
    re-screen from scratch if there's already a Notes verdict; ask if the user wants a re-screen
    instead).

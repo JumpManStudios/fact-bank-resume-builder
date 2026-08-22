@@ -19,9 +19,11 @@ JD comes in  →  screen it fast  →  tailor a resume + cover letter from ONE f
              →  never invent a fact  →  track outcome in a durable pipeline table
 ```
 
-The core discipline: **there are exactly two files that hold truth** (`template/fact-bank.md`
-and `template/accomplishments.yaml`). Every resume, cover letter, and interview-prep sheet is
-*generated* from them, never maintained by hand as a separate copy. See
+The core discipline: **there are two layers that hold truth** — a selection layer
+(`template/fact-bank.md` for narrative bullets, `template/skills-matrix.md` for skill lines)
+and a depth layer (`template/accomplishments.yaml`, the evidence the selection layer is
+distilled from, not a resume source on its own). Every resume, cover letter, and
+interview-prep sheet is *generated* from them, never maintained by hand as a separate copy. See
 `EVIDENCE-DISCIPLINE.md` for the full model of how raw material becomes a publishable claim.
 
 ## Quickstart
@@ -72,8 +74,8 @@ fictional job application walked through the entire chain, every artifact commit
 | Path | What lives there |
 |---|---|
 | `job-listings/*.md` | Converted JDs (one per role), each with a `## Flags` section for traps/constraints. `PIPELINE.md` is the durable record — the JD `.md` files and resumes are working artifacts that can be deleted once a role closes; the PIPELINE row stays. |
-| `template/fact-bank.md` | **The only source of truth for facts.** Every resume/cover-letter bullet is selected and reframed from here, never invented. |
-| `template/skills-matrix.md` | Canonical "Technical Skills" lines + which to lead with, by role type. |
+| `template/fact-bank.md` | **The source of truth for narrative facts** (bullets, summary, experience). Every resume/cover-letter bullet is selected and reframed from here, never invented. |
+| `template/skills-matrix.md` | **The source of truth for skill claims.** Canonical "Technical Skills" lines + which to lead with, by role type — selected and reframed the same way, never invented. |
 | `template/resume-template.md` | The `{{slot}}` skeleton `/tailor-resume` copies and fills. |
 | `template/cover-letter-template.md` | Structure, voice constraints, and skeleton for cover letters. |
 | `template/accomplishments.yaml` | Structured store of curated real work (bullet + what-I-did + real metric + evidence pointer) — feeds `/prep-sheet`. |
