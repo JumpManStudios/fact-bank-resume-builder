@@ -72,9 +72,8 @@ moves per resume is the emphasis clause.
 
 ### Mission line (OFF by default — include only for a genuinely strong, honest hook)
 A generic "I admire your mission" line reads as filler and costs more than it earns; only add
-one when the tie is real, specific, and would survive a skeptical read. See "Company-specific
-hooks" (if you've added that section) for a canonical place to keep the real, verifiable
-connections this line draws from.
+one when the tie is real, specific, and would survive a skeptical read. **Select it from the
+"Company-specific hooks" section below — never manufacture one per-resume.**
 - **{{Industry pattern 1}}:** {{a genuine personal angle tied to that industry — only use if
   it's actually true}}
 - **Other:** tie an honest personal angle to {Company}'s mission, or omit — don't force it.
@@ -149,6 +148,31 @@ Context line (reframe per role):
 - **{{Gap 1}}:** {{honest framing + closest real transferable experience}}
 - **{{Gap 2}}:** {{honest framing + closest real transferable experience}}
 - **{{Gap 3}}:** {{honest framing + closest real transferable experience}}
+
+---
+
+## Company-specific hooks
+
+<!-- `/cover-letter` opens paragraph 3 from a "genuine established connection," and the Summary
+     kit's mission line above needs the same kind of thing. Both are the highest fabrication
+     risk in the whole repo — a fake personal connection to a company reads worse than no
+     personal paragraph at all, and it's exactly the kind of thing an interviewer follow-up
+     question exposes. This section exists so those hooks are SELECTED from something real and
+     verifiable, never manufactured per-letter under deadline pressure.
+
+     Add an entry only when you have an actual, checkable connection to a company you're
+     applying to: genuine product use, a personal/professional tie, a specific shared value.
+     Note the date you confirmed the detail and keep the framing conservative — real but light
+     beats real but oversold. If a fact could go stale (an org-chart relationship, a role that
+     might have changed), flag it explicitly so a future draft re-verifies before reusing it
+     rather than trusting a stale note at face value. Delete an entry once the application it
+     was written for closes, or keep it if the connection is durable and you're likely to apply
+     to the same company again. -->
+
+- **{{Company name}}:** {{The real, verifiable connection — what it is, how you know it's true,
+  and how strong a claim it honestly supports. Confirmed {{date}}.}} *({{Optional: a caveat on
+  how hard to lean on this, or a flag to re-verify before reuse — e.g. "light, don't write
+  'regular user'" or "verify the corporate relationship hasn't changed before reusing."}})*
 
 ---
 
