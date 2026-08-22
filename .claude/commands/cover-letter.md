@@ -57,13 +57,14 @@ than from a copy here, so there is only one version to keep current.
 3. Pull the JD's top 1–2 requirements to anchor paragraph 1's credential and paragraph 2's
    claims — same "priority stack" extraction as `/tailor-resume`.
 4. Decide the paragraph-3 approach:
-   - If the company/product has an established genuine connection (already in the fact-bank
-     Summary kit's mission-line options), use it — stick to already-established specifics;
-     don't invent new personal detail.
-   - If it's unclear whether a real personal connection exists, **ask the user** directly (e.g.
-     "Do you have any real personal connection to {Company} or what they build?") before
-     drafting paragraph 3 — this paragraph is the letter's differentiator and is not worth
-     guessing at.
+   - **Check `fact-bank.md`'s "Company-specific hooks" section first** for an entry matching
+     this company. If one exists, select and reframe it — don't invent new personal detail, and
+     respect any staleness flag on the entry (re-verify before reusing if it's flagged).
+   - If no entry exists but it's unclear whether a real personal connection exists, **ask the
+     user** directly (e.g. "Do you have any real personal connection to {Company} or what they
+     build?") before drafting paragraph 3 — this paragraph is the letter's differentiator and is
+     not worth guessing at. If the user confirms a real connection, add it to `fact-bank.md`'s
+     Company-specific hooks section so it's there for next time, not just this letter.
    - If there's genuinely no personal hook, write the professional version instead: honest "why
      this role fits where I am right now" reasoning, no forced sentiment.
 5. Draft the letter following the structural formula in `template/cover-letter-template.md`.

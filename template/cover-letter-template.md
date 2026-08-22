@@ -53,11 +53,13 @@ Real career-transition context where it applies. Then, only when genuine, a pers
 as specific and verifiable as your best reference letter's — something like a real years-long
 relationship to the product, a concrete personal stake, or a specific transferable story.
 
-This paragraph is the letter's differentiator and the highest-risk spot in the whole repo for
-invention. A fabricated personal connection reads worse than no personal paragraph at all, and
-it is the kind of thing an interviewer asks a follow-up question about. When it is unclear
-whether a real hook exists, ask before drafting it. When there genuinely isn't one, write the
-grounded professional case instead: why this role, why this stack, why now.
+**Pull this from `fact-bank.md`'s "Company-specific hooks" section — select and reframe it,
+don't write a new one from scratch.** This paragraph is the letter's differentiator and the
+highest-risk spot in the whole repo for invention. A fabricated personal connection reads worse
+than no personal paragraph at all, and it is the kind of thing an interviewer asks a follow-up
+question about. When it is unclear whether a real hook exists (no matching entry in the fact
+bank), ask before drafting it. When there genuinely isn't one, write the grounded professional
+case instead: why this role, why this stack, why now.
 
 **Closing**
 
