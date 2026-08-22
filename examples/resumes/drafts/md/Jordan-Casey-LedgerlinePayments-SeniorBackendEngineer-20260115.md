@@ -1,8 +1,11 @@
 <!--
 FICTIONAL example resume — Step 3 (/tailor-resume) output in the worked example. Generated from
-examples/template/fact-bank.md against examples/job-listings/ledgerline-payments-senior-backend-engineer.md.
-Selected and reframed per the "Resume house style" in fact-bank.md — nothing here was invented
-beyond what's in examples/template/fact-bank.md and examples/template/accomplishments.yaml.
+examples/template/fact-bank.md and examples/template/skills-matrix.md against
+examples/job-listings/ledgerline-payments-senior-backend-engineer.md. Selected and reframed per
+the "Resume house style" in fact-bank.md — every claim here traces to fact-bank.md or
+skills-matrix.md; nothing was pulled in from accomplishments.yaml that wasn't also promoted into
+fact-bank.md first (accomplishments.yaml is the deeper evidence layer, not a resume source on
+its own — see /tailor-resume's cardinal rule).
 -->
 
 # Jordan Casey
@@ -22,14 +25,14 @@ microservices fleet with a focus on idempotency and failure isolation.
 ## What I bring to this role
 
 - **Own backend service architecture end to end.** I design service boundaries, API contracts,
-  and failure-handling behavior myself, and I've led a phased decomposition of a monolithic
-  checkout flow into four independently deployable services.
-- **Lead migrations that don't break production.** I've moved a nightly settlement batch to a
-  near-real-time pipeline and a monolithic checkout flow to a service fleet, both validated with
-  a shadow-run or phased cutover instead of a risky big-bang release.
-- **Design for failure, not just the happy path.** I built idempotent payment endpoints and an
-  event-sourced reconciliation job that eliminated duplicate-charge incidents from retried
-  requests during network failures.
+  and failure-handling behavior myself, and I've led a decomposition of a monolithic checkout
+  flow into four independently deployable services.
+- **Lead migrations that don't break production.** I moved a nightly settlement batch to a
+  near-real-time pipeline validated with a two-week shadow run before cutover, and decomposed a
+  monolithic checkout flow into four services that now ship on their own schedules.
+- **Design for failure, not just the happy path.** I built idempotent payment endpoints backed
+  by an event bus, with a companion reconciliation job that catches ledger drift so retried
+  requests during network failures never double-charge a customer.
 - **Mentor through real technical ownership.** I pair and design-review with mid-level engineers
   until they can lead their own service migrations independently, not just leave comments on a
   pull request.
@@ -58,29 +61,30 @@ Python/Go service fleet handling tens of millions of dollars in monthly transact
 
 **Checkout & payments architecture**
 
-- Decomposed a monolithic checkout flow into four independently deployable services, cutting
-  deploy-blocking incidents from roughly six a quarter to about one and letting the payments and
-  catalog teams ship independently of each other.
-- Designed idempotent payment-processing endpoints backed by an event bus for order-state
-  changes, so retried and duplicate requests during network failures never double-charge a
-  customer.
-- Led migration of the settlement job from a nightly batch process to a near-real-time pipeline,
-  cutting merchant payout latency from once daily to under two hours.
+- **Decomposed a monolithic checkout flow into four independently deployable services.**
+  The payments and catalog teams now ship independently of each other, removing the
+  cross-domain coupling that had caused deploy-blocking incidents.
+- **Designed idempotent payment-processing endpoints backed by an event bus for order-state
+  changes.** A companion reconciliation job catches any ledger drift, so retried and duplicate
+  requests during network failures never double-charge a customer.
+- **Led migration of the settlement job from a nightly batch process to a near-real-time
+  pipeline.** Validated with a two-week shadow run before cutover, the change cut merchant
+  payout latency from once daily to under two hours.
 
 **Platform reliability & delivery**
 
-- Rebuilt the checkout team's CI/CD pipeline around trunk-based development and automated
-  canary rollouts, cutting the average change lead time from days to hours.
-- Introduced structured logging and distributed tracing across the service fleet, cutting
-  average incident diagnosis time roughly in half.
+- **Rebuilt the checkout team's CI/CD pipeline around trunk-based development and automated
+  canary rollouts.** Average change lead time dropped from days to hours.
+- **Introduced structured logging and distributed tracing across the service fleet.** Average
+  incident diagnosis time dropped roughly in half.
 
 **Technical leadership & mentorship**
 
-- Mentor two mid-level engineers through design review and pairing, both of whom have since led
+- **Mentor two mid-level engineers through design review and pairing.** Both have since led
   their own service migrations independently.
-- Represent the backend team in cross-functional architecture reviews with product and platform
-  engineering, translating system constraints into tradeoffs a non-engineering audience can
-  weigh in on.
+- **Represent the backend team in cross-functional architecture reviews with product and
+  platform engineering.** I translate system constraints into tradeoffs a non-engineering
+  audience can weigh in on.
 
 ## Honest scope notes
 
