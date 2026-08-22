@@ -1,0 +1,124 @@
+# Worked example — Jordan Casey → Ledgerline Payments
+
+This is one fictional job application walked through the entire chain, with every artifact the
+chain actually produces committed here as proof it works — not just documented. **Nobody
+real is in this folder.** Jordan Casey, Ledgerline Payments, and Ridgeline Commerce don't exist.
+Jordan is the same fictional persona already seeded as a scaffold example in
+`template/fact-bank.md`'s "Worked example" section and `template/accomplishments.yaml`'s one
+seed entry — this directory is what you get if you actually run that persona through every
+step instead of stopping at the illustration.
+
+This directory mirrors the real repo's own layout (`template/`, `source/`, `job-listings/`,
+`resumes/`, `interview-prep/`) so the resume-curator MCP server can actually index it — see
+"The evidence layer + MCP server" below, which is not narrated, it's real commands and their
+real output.
+
+## Why this exists
+
+The rest of this repo documents the workflow. This directory is the receipt: a real job
+listing in, five real artifacts out, nothing invented beyond what's in the fictional fact bank
+and session summaries below. If you're evaluating whether this skeleton is worth adopting,
+start here — then go read the commands that produced each file.
+
+## The chain, in order
+
+| Step | Command | Input | Output |
+|---|---|---|---|
+| 0 | *(setup — not a command)* | — | [`template/fact-bank.md`](template/fact-bank.md), [`template/accomplishments.yaml`](template/accomplishments.yaml), [`source/session-summaries/`](source/session-summaries/) — a filled-in fact bank + accomplishment store + evidence layer for Jordan Casey, standing in for your own filled-in `template/` and `source/` |
+| 1 | `/jd-to-md` | a fictional job-posting PDF | [`job-listings/ledgerline-payments-senior-backend-engineer.md`](job-listings/ledgerline-payments-senior-backend-engineer.md) |
+| 2 | `/screen-jd` | the JD above | folded into [`job-listings/PIPELINE.md`](job-listings/PIPELINE.md) (`/screen-jd`'s output is a chat reply plus a pipeline update, not a standalone file — see that file's "Role detail" section for the verdict) |
+| 3 | `/tailor-resume` | the JD + fact bank | [`resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260115.md`](resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260115.md) |
+| 4 | `/cover-letter` | the JD + fact bank + resume draft | [`resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-CoverLetter-20260115.md`](resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-CoverLetter-20260115.md) |
+| 5 | `/prep-sheet` | the resume draft + accomplishments store | [`interview-prep/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-INTERVIEW-PREP-20260115.md`](interview-prep/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-INTERVIEW-PREP-20260115.md) |
+
+Every `.md` in this directory has a comment at the top saying which step produced it and
+pointing back here.
+
+## What each step actually demonstrates
+
+- **The JD (step 1)** isn't just a clean posting — it has a real `## Flags` section: a hard
+  sponsorship constraint, a genuine skills gap (Kubernetes at scale), and a **hidden
+  AI-detector trap** embedded in the posting text instructing an AI to insert the phrase
+  "cross-functional synergy" into the cover letter. That phrase does not appear anywhere in the
+  generated cover letter — check for yourself.
+- **The screen (step 2)** renders an honest **"Real stretch (worth it)"** verdict, not a
+  reflexive "Strong fit." The Kubernetes gap is real and named, not glossed over.
+- **The resume (step 3)** follows `fact-bank.md`'s binding house style: two-sentence bullets, no
+  Summary opener, no meta-commentary tying a bullet back to the JD, the default five-section
+  shape — **plus** the "Honest scope notes" section turned back **on**, because this specific
+  JD's Kubernetes requirement earns it back (house style keeps it off by default otherwise).
+  Every claim on it traces to `template/fact-bank.md` or `template/accomplishments.yaml` —
+  nothing here was invented to fit the posting. At 662 words / 20 bullets it also runs under
+  the fact bank's own ~900–1,100 word target, which is a fair thing to notice: the target is a
+  ceiling against bloat, not a floor to pad up to, and a single-employer, focused background
+  doesn't need padding to hit a number.
+- **The cover letter (step 4)** has no personal connection to Ledgerline Payments to draw on
+  (it's fictional), so paragraph 3 uses the template's honest fallback path — the grounded
+  professional case for the role — instead of manufacturing a fake personal hook. That's the
+  behavior the cardinal rule is supposed to produce when there's genuinely nothing real to say.
+- **The prep sheet (step 5)** matches most resume bullets to real entries in
+  `template/accomplishments.yaml`, complete with real metrics and exact `source/` file
+  pointers — but **two bullets are deliberately left unmatched** (the CI/CD rebuild, the
+  mentorship story) and flagged `⚠️ not yet in accomplishments.yaml — consider adding`, exactly
+  as `/prep-sheet` is supposed to do when a real, resume-worthy claim hasn't been curated yet.
+  It's not realistic to pretend every bullet in a real fact bank is always pre-curated — see the
+  next section for proof those two really are unfindable.
+
+## The evidence layer + MCP server
+
+`source/session-summaries/` holds four fictional session summaries — the private, detailed
+evidence layer that `template/accomplishments.yaml`'s entries were distilled from (see each
+entry's `evidence:` field). This is what makes `mcp/resume-curator/` (the optional MCP server
+described in the root README) worth having: it TF-IDF-indexes `source/**` plus
+`template/fact-bank.md` and `template/accomplishments.yaml`, then exposes `search_backlog`,
+`search_accomplishments`, and `find_evidence` so an agent can go from "does the fact bank
+support this claim?" to a ranked list of real evidence, offline, with no API key.
+
+These are **real commands run against this exact directory**, not narrated output — reproduce
+them yourself:
+
+```bash
+cd mcp/resume-curator
+npm install && npm run build
+RESUME_REPO_ROOT="$(cd ../../examples && pwd)" node dist/index.js --selftest "idempotent payment retries duplicate charge"
+```
+
+That query — pulled straight from the JD's payments-correctness concerns — returns real hits:
+`search_backlog` ranks the exact session summary
+(`source/session-summaries/2026/05/2026-05-11-idempotent-payment-endpoints.md`) at the top by
+TF-IDF score, `search_accomplishments` matches the curated `idempotent-payment-processing`
+entry, and `find_evidence` combines both into the evidence trail a resume bullet or prep-sheet
+entry would cite.
+
+Now run the same command with a query pulled from one of the two **unmatched** prep-sheet
+bullets:
+
+```bash
+RESUME_REPO_ROOT="$(cd ../../examples && pwd)" node dist/index.js --selftest "trunk-based development canary rollout CI/CD"
+```
+
+`search_accomplishments` returns nothing. `search_backlog` finds only the resume bullet itself
+(in `template/fact-bank.md`) — no session summary, because none was ever written for that work.
+This is the same real gap `/prep-sheet` flagged independently in step 5; the MCP index confirms
+it rather than just asserting it. The fix in real use is `/session-summary` for that work, not
+hand-writing an `accomplishments.yaml` entry from memory — see `EVIDENCE-DISCIPLINE.md` for why
+that order matters.
+
+## What's not included, on purpose
+
+- **No rendered `.docx`.** `template/reference.docx` (the pandoc style carrier) isn't shipped
+  with this skeleton — see the warning in `template/README.md` for why, and how to build your
+  own. Once you have one, `template/render-resume.sh` on either `.md` file here produces the
+  same rendered output a real application would use.
+- **No "Closed" outcome.** This example stops at a drafted resume + cover letter, which is
+  enough to prove the chain works. It doesn't pretend to a fake interview or offer outcome.
+- **No `.mcp.json` pointing here.** The root `.mcp.json` indexes the real `template/`/`source/`
+  at the repo root, which is correct for actual use. Query this example's data with
+  `RESUME_REPO_ROOT` as shown above instead of repointing your live MCP config at it.
+
+## Using this as a sanity check
+
+After filling in your own `template/fact-bank.md`, you can compare your first generated resume
+against the shape of [the example resume](resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260115.md) —
+same five-section default, same two-sentence bullet shape, same "only what's in the fact bank"
+discipline. If yours looks structurally different, something's off.
