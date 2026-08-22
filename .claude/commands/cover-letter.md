@@ -67,13 +67,20 @@ than from a copy here, so there is only one version to keep current.
      Company-specific hooks section so it's there for next time, not just this letter.
    - If there's genuinely no personal hook, write the professional version instead: honest "why
      this role fits where I am right now" reasoning, no forced sentiment.
-5. Draft the letter following the structural formula in `template/cover-letter-template.md`.
-6. **Write the draft** to
+5. **Salutation and closing** are house conventions, not per-letter choices. Default the
+   salutation to `Dear {Company} Hiring Team,` (a named hiring manager only when one is
+   findable and the spelling is confirmed; `To whom it may concern,` is a last resort). Close
+   on the fixed two-slot frame, filling `{{WHAT_I_BUILT}}` from what this letter's body
+   paragraphs just argued and `{{COMPANY_CLAUSE}}` from what this specific company is doing.
+   Both slots get written fresh: never carry either one over verbatim from a previous letter.
+   Full rules in `template/cover-letter-template.md`'s Structure section.
+6. Draft the letter following the structural formula in `template/cover-letter-template.md`.
+7. **Write the draft** to
    `resumes/drafts/md/{{Your-Name}}-{Company}-{Role}-CoverLetter-{YYYYMMDD}.md` (today's date,
    kebab company/role — match the naming used for the resume draft if one exists). **`.md`
    sources always live in `resumes/drafts/md/`** — never loose in `resumes/drafts/`, which
    holds only rendered `.docx`/`.pdf`.
-7. **Render to .docx** via the render wrapper (pandoc + the same reference doc used for resumes
+8. **Render to .docx** via the render wrapper (pandoc + the same reference doc used for resumes
    + the bullet-spacing cleanup — don't call pandoc directly):
    ```
    template/render-resume.sh "<draft.md>" "resumes/drafts/{{Your Name}} {Company}-{Role} Cover Letter {YYYYMMDD}.docx"

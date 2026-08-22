@@ -13,7 +13,7 @@ August 15, 2026
 
 Ledgerline Payments
 
-To whom it may concern,
+Dear Ledgerline Payments Hiring Team,
 
 I'm Jordan Casey, a backend engineer who owns checkout and payments architecture end to end,
 from service design through production on-call. At Ridgeline Commerce I led the decomposition
@@ -38,8 +38,9 @@ exactly the kind of architecture problem I've spent the last several years solvi
 rather do that work somewhere still early enough in the migration to help shape how it gets
 done.
 
-Thank you for your time reading this. If you have any questions please feel free to reach out
-to my contact information below. I look forward to speaking with you.
+Thank you for considering my application. I would welcome the opportunity to talk through the
+checkout decomposition I led at Ridgeline Commerce and how that experience could translate to
+the migration off your legacy monolith.
 
 Best,
 Jordan Casey

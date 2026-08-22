@@ -31,7 +31,13 @@ If no reviewed letter exists yet, this template is the fallback.
 **Header**
 
 Date, company name, address if the JD or company page gives one (otherwise city/state, or
-omit). Then `To whom it may concern,`, or a named hiring manager if one is findable.
+omit). Then the salutation.
+
+**Default to `Dear {{COMPANY}} Hiring Team,`.** A named hiring manager beats it when one is
+findable and you are confident in the name and its spelling. `To whom it may concern,` is the
+last resort: it reads colder and more form-letter than the default, and it is the one line in
+the letter that signals you did not look. This is a house convention, not a per-letter
+decision, so don't re-litigate it every run.
 
 **Paragraph 1 — who you are, direct and short**
 
@@ -63,8 +69,24 @@ case instead: why this role, why this stack, why now.
 
 **Closing**
 
-Brief thanks, "I look forward to speaking with you," then name, phone, email. Do not summarize
-the letter that was just written.
+Brief thanks, then a two-slot closing line, then name, phone, email. Do not summarize the
+letter that was just written.
+
+The frame is fixed. The two slots get filled fresh for every letter:
+
+> Thank you for considering my application. I would welcome the opportunity to talk through
+> {{WHAT_I_BUILT}} and how that experience could translate to {{COMPANY_CLAUSE}}.
+
+- **`{{WHAT_I_BUILT}}`** — the specific work the body paragraphs just argued, named in this
+  letter's own words (something like "the checkout decomposition I led"). It echoes what the
+  reader just read rather than introducing a new claim. If the filled slot could drop into any
+  of your letters unchanged, it is too generic.
+- **`{{COMPANY_CLAUSE}}`** — what this specific company is doing that the work maps onto
+  (something like "the migration your platform team is running"). Same rule: it comes from this
+  posting, not from the last letter you wrote.
+
+Reusing a finished closing line across letters is the copying this template warns about up top.
+The frame repeats; the slots never do.
 
 ---
 
@@ -89,7 +111,7 @@ the letter that was just written.
 {{COMPANY}}
 {{ADDRESS — only if the JD or company page gives one; omit otherwise}}
 
-To whom it may concern,
+Dear {{COMPANY}} Hiring Team,
 
 {{PARAGRAPH_1}}
 
@@ -97,7 +119,7 @@ To whom it may concern,
 
 {{PARAGRAPH_3}}
 
-Thank you for your time reading this. If you have any questions please feel free to reach out to my contact information below. I look forward to speaking with you.
+Thank you for considering my application. I would welcome the opportunity to talk through {{WHAT_I_BUILT}} and how that experience could translate to {{COMPANY_CLAUSE}}.
 
 Best,
 {{Your Name}}
