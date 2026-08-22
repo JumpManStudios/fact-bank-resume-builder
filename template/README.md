@@ -112,6 +112,17 @@ a bundled one:
 - `brew install pandoc` (or `winget install --id JohnMacFarlane.Pandoc -e` on Windows) — a
   system install, which the wrapper will prefer if present.
 
+**Platform notes.** Verified on macOS/Linux (bash) and Windows via Git Bash and the `py`
+launcher. The wrapper probes `python3`, `python`, and `py` in that order, by **capability**
+(it actually runs `-c 'import sys, zipfile; assert sys.version_info[0] == 3'`) rather than
+trusting any one name to exist or mean what it says — the pandoc lookup does the same across
+every candidate for `pypandoc`. This matters specifically on Windows: the `python3.exe` /
+`python.exe` entries some systems put on `PATH` under `WindowsApps` are Microsoft Store
+app-execution alias stubs that appear on `PATH` but don't execute; `py` (the Python Launcher for
+Windows) is the interpreter that actually works there. If no candidate resolves, the wrapper
+fails with a clear message rather than a bare traceback, and prints the manual fallback command
+to run `fix-bullet-spacing.py` by hand.
+
 ### Post-render repairs (`fix-bullet-spacing.py`)
 Despite the name, this script runs two passes over every rendered file.
 
