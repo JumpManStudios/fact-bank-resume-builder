@@ -99,8 +99,9 @@ root; [`examples/README.md`](examples/README.md) explains the path mapping.
 - Your own identity block, experience, and skills in `template/fact-bank.md` and
   `template/skills-matrix.md`.
 - Your own disclosure rules, if any apply to your situation.
-- A `template/reference.docx` (a Word doc pandoc uses purely for its styles) if you want
-  `.docx` rendering — see `template/README.md` for the gotcha around building one cleanly.
+- Your own `template/reference.docx` (a Word doc pandoc uses purely for its styles), if you
+  want personalized `.docx` styling — a small generic default ships so rendering works out of
+  the box; see `template/README.md` for the gotcha around building your own cleanly.
 - Real reviewed cover letters, over time, to anchor `/cover-letter`'s voice — the template
   works from day one, but gets better once you have your own edited examples to point it at.
 
@@ -114,7 +115,7 @@ root; [`examples/README.md`](examples/README.md) explains the path mapping.
 | `template/resume-template.md` | The `{{slot}}` skeleton `/tailor-resume` copies and fills. |
 | `template/cover-letter-template.md` | Structure, voice constraints, and skeleton for cover letters. |
 | `template/accomplishments.yaml` | Structured store of curated real work (bullet + what-I-did + real metric + evidence pointer) — feeds `/prep-sheet`. |
-| `template/reference.docx` | Pandoc style carrier for `.docx` rendering — not included; see `template/README.md`. |
+| `template/reference.docx` | Pandoc style carrier for `.docx` rendering. Ships with a small, generic default — see `template/README.md` for how to swap in your own. |
 | `resumes/drafts/md/` | `.md` sources for in-progress applications. The `.md` is always the source of truth; never hand-edit rendered output. |
 | `resumes/drafts/` (root) | Rendered `.docx`/`.pdf` for in-progress applications. |
 | `resumes/in-review/` | Out with a human editor, if you use one. |
