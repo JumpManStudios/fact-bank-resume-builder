@@ -27,9 +27,9 @@ entry distills from, and what the resume-curator MCP indexes.
 
 ## Impact
 
-- Zero confirmed duplicate-charge incidents in the following 12 months (checked against the
-  support-ticket tracker in 2026-05-through-2027-05 range at time of writing this summary,
-  informally — worth pulling a hard export before citing on a resume).
+- No duplicate-charge incidents reported in the roughly two months since rollout, based on an
+  informal check of the support-ticket tracker — worth revisiting with a hard export and a
+  longer window before citing a firm number on a resume.
 - `ledger-reconciler` runs as a scheduled job now; in the two months since rollout it's
   auto-resolved 4 drift cases that would previously have paged on-call.
 

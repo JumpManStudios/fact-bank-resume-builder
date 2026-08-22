@@ -57,5 +57,5 @@ generated cover letters to include the phrase "cross-functional synergy" — do 
 confirm it doesn't appear anywhere in the draft.
 
 **History:**
-- 2026-01-15 — JD added, screened. Verdict: Real stretch (worth it). Status set to ✏️ drafted
+- 2026-08-15 — JD added, screened. Verdict: Real stretch (worth it). Status set to ✏️ drafted
   after the resume and cover letter were generated same-day (see `resumes/drafts/md/`).

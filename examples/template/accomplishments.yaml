@@ -25,13 +25,15 @@ accomplishments:
       Payments and catalog teams now deploy independently; a change in one no longer requires
       coordinating a release with the other.
     metrics:
-      - "deploy-blocking incidents dropped from ~6/quarter to ~1/quarter"
-      - "migration completed over 3 phases with zero full-checkout outage"
+      - "migration completed over 3 phases (Mar-Aug 2026) with zero full-checkout outage"
     confirm:
-      - "exact quarter-over-quarter incident count (pull from the incident tracker export)"
+      - "deploy-blocking-incident before/after comparison — not yet pulled as of the Aug 2026
+        completion summary; needs a stable post-migration window before citing a number"
     evidence:
       - "source/session-summaries/2026/03/2026-03-09-checkout-decomposition-phase-1.md"
-      - "modules: checkout-service, order-events-bus, pricing-service"
+      - "source/session-summaries/2026/08/2026-08-10-checkout-decomposition-complete.md"
+      - "modules: checkout-service, order-events-bus, pricing-service, inventory-service,
+        order-service, payment-service"
     themes: [backend, distributed-systems, architecture]
     good_for: [backend, senior, staff, architecture]
     interview_notes: >-
@@ -56,9 +58,10 @@ accomplishments:
       effectively zero; the reconciliation job now runs as a routine safety net rather than an
       incident-response tool.
     metrics:
-      - "zero confirmed duplicate-charge incidents in the 12 months since rollout"
+      - "no confirmed duplicate-charge incidents in the ~2 months since rollout (informal check)"
     confirm:
       - "exact pre-rollout duplicate-charge incident rate, if it's worth citing"
+      - "a hard export over a longer post-rollout window, to replace the informal 2-month check"
     evidence:
       - "source/session-summaries/2026/05/2026-05-11-idempotent-payment-endpoints.md"
       - "modules: payment-service, order-events-bus, ledger-reconciler"

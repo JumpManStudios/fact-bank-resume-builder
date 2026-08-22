@@ -27,9 +27,9 @@ start here — then go read the commands that produced each file.
 | 0 | *(setup — not a command)* | — | [`template/fact-bank.md`](template/fact-bank.md), [`template/skills-matrix.md`](template/skills-matrix.md), [`template/accomplishments.yaml`](template/accomplishments.yaml), [`source/session-summaries/`](source/session-summaries/) — a filled-in fact bank + skills matrix + accomplishment store + evidence layer for Jordan Casey, standing in for your own filled-in `template/` and `source/` (`resume-template.md`/`cover-letter-template.md` are pure structure, so this example reuses the root ones rather than duplicating them) |
 | 1 | `/jd-to-md` | a fictional job-posting PDF | [`job-listings/ledgerline-payments-senior-backend-engineer.md`](job-listings/ledgerline-payments-senior-backend-engineer.md) |
 | 2 | `/screen-jd` | the JD above | folded into [`job-listings/PIPELINE.md`](job-listings/PIPELINE.md) (`/screen-jd`'s output is a chat reply plus a pipeline update, not a standalone file — see that file's "Role detail" section for the verdict) |
-| 3 | `/tailor-resume` | the JD + fact bank | [`resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260115.md`](resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260115.md) |
-| 4 | `/cover-letter` | the JD + fact bank + resume draft | [`resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-CoverLetter-20260115.md`](resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-CoverLetter-20260115.md) |
-| 5 | `/prep-sheet` | the resume draft + accomplishments store | [`interview-prep/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-INTERVIEW-PREP-20260115.md`](interview-prep/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-INTERVIEW-PREP-20260115.md) |
+| 3 | `/tailor-resume` | the JD + fact bank | [`resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260815.md`](resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260815.md) |
+| 4 | `/cover-letter` | the JD + fact bank + resume draft | [`resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-CoverLetter-20260815.md`](resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-CoverLetter-20260815.md) |
+| 5 | `/prep-sheet` | the resume draft + accomplishments store | [`interview-prep/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-INTERVIEW-PREP-20260815.md`](interview-prep/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-INTERVIEW-PREP-20260815.md) |
 
 Every `.md` in this directory has a comment at the top saying which step produced it and
 pointing back here.
@@ -127,6 +127,6 @@ that order matters.
 ## Using this as a sanity check
 
 After filling in your own `template/fact-bank.md`, you can compare your first generated resume
-against the shape of [the example resume](resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260115.md) —
+against the shape of [the example resume](resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260815.md) —
 same five-section default, same two-sentence bullet shape, same "only what's in the fact bank"
 discipline. If yours looks structurally different, something's off.

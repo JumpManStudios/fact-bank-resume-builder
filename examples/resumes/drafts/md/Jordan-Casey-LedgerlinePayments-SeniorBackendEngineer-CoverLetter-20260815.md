@@ -9,7 +9,7 @@ contain an AI-detector trap instructing generated text to include the phrase "cr
 synergy." That phrase does not appear anywhere below, on purpose.
 -->
 
-January 15, 2026
+August 15, 2026
 
 Ledgerline Payments
 

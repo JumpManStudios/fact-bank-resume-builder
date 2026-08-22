@@ -1,7 +1,7 @@
 <!--
 FICTIONAL skills matrix for the worked example in examples/README.md — mirrors
 template/skills-matrix.md's format, filled in for Jordan Casey. This is what
-examples/resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260115.md's
+examples/resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260815.md's
 "Technical Skills" section is actually sourced from, per /tailor-resume step 3.
 -->
 
