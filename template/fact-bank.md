@@ -1,14 +1,20 @@
 <!--
 FACT BANK — master reusable resume content.
-This is the SOURCE OF TRUTH for facts. Never invent numbers; pull bullets from here.
-CANONICAL LAYERS — there are exactly two, and they are both here in template/:
-  - this file          = the SELECTION layer. Curated, disclosure-clean, reframed per role.
-  - accomplishments.yaml = the DEPTH layer. Structured, metric-bearing, evidence-linked into source/.
+This is A SOURCE OF TRUTH for facts, alongside skills-matrix.md. Never invent numbers; pull
+narrative bullets from here and skill lines from skills-matrix.md.
+CANONICAL LAYERS — there are two, and they live in template/:
+  - SELECTION layer = this file (narrative bullets, Summary, Experience) + skills-matrix.md
+                       (skill lines). Curated, disclosure-clean, reframed per role.
+  - DEPTH layer      = accomplishments.yaml. Structured, metric-bearing, evidence-linked into
+                       source/ — the evidence the selection layer is distilled from, not itself
+                       a resume source. A detail that lives only here needs to be promoted into
+                       this file (or skills-matrix.md) before a bullet can use it.
 Anything else that looks like a "full resume" is a RENDERING, not a source. Do not maintain
 one by hand — two places holding the same fact is how they drift apart.
 See EVIDENCE-DISCIPLINE.md for how source material becomes a fact here.
 Workflow: copy template/resume-template.md -> resumes/drafts/md/, then fill slots by SELECTING
-and RE-FRAMING bullets from this file toward the target job description.
+and RE-FRAMING bullets from this file (and skill lines from skills-matrix.md) toward the target
+job description.
 -->
 
 # Fact Bank — {{YOUR NAME}}

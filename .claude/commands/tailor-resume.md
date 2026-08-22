@@ -20,11 +20,15 @@ You are generating a tailored resume from a specific job listing.
 4. `template/resume-template.md` — the skeleton + slot guidance.
 
 ## The cardinal rule
-**Use only facts that exist in `fact-bank.md`. Never invent, inflate, or borrow a metric,
-technology, or claim that isn't there.** If the JD wants something the candidate doesn't have,
-you do NOT manufacture it — you either (a) surface the closest real transferable experience, or
-(b) name it in an honest-scope note. This is non-negotiable: some employers explicitly screen
-for unreviewed AI output (see Flags), and fabrication is the fastest way to fail.
+**Use only facts that exist in `fact-bank.md` or `skills-matrix.md` — the two public-claim
+sources. Never invent, inflate, or borrow a metric, technology, or claim that isn't there, and
+never pull a specific detail (a number, a technique, a qualifier) from `accomplishments.yaml`
+that hasn't also been promoted into `fact-bank.md` first** — `accomplishments.yaml` is the
+deeper evidence layer these two are distilled from, not a resume source on its own. If the JD
+wants something the candidate doesn't have, you do NOT manufacture it — you either (a) surface
+the closest real transferable experience, or (b) name it in an honest-scope note. This is
+non-negotiable: some employers explicitly screen for unreviewed AI output (see Flags), and
+fabrication is the fastest way to fail.
 
 ## Disclosure rules (non-negotiable, if the fact bank defines any)
 Everything you write is public-facing. If `fact-bank.md`'s banner defines disclosure rules

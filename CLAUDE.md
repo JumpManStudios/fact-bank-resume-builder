@@ -13,8 +13,8 @@ around one rule: **never invent a fact** — everything public-facing traces bac
 | Path | What lives there |
 |---|---|
 | `job-listings/*.md` | Converted JDs (one per role), each with a `## Flags` section for traps/constraints. `PIPELINE.md` is the durable job-hunt record — one row per role, status + notes; the JD `.md` files and resumes are working artifacts that can be deleted once a role closes, the PIPELINE row stays. |
-| `template/fact-bank.md` | **The only source of truth for facts.** Every resume/cover-letter bullet is selected and reframed from here, never invented. If your situation needs disclosure rules (see below), they're banner'd at the top. |
-| `template/skills-matrix.md` | Canonical "Technical Skills" lines + which to lead with, by role type. |
+| `template/fact-bank.md` | **The source of truth for narrative facts** (bullets, summary, experience). Every resume/cover-letter bullet is selected and reframed from here, never invented. If your situation needs disclosure rules (see below), they're banner'd at the top. |
+| `template/skills-matrix.md` | **The source of truth for skill claims.** Canonical "Technical Skills" lines + which to lead with, by role type — selected and reframed the same way `fact-bank.md`'s bullets are, never invented. |
 | `template/resume-template.md` | The `{{slot}}` skeleton `/tailor-resume` copies and fills. |
 | `template/cover-letter-template.md` | Structure, voice constraints, and skeleton for cover letters. `/cover-letter` reads it every run. Names which files are legitimate voice references and which are not. |
 | `template/accomplishments.yaml` | Structured store of curated real work (bullet + what-I-did + real metric + evidence pointer into `source/`) — feeds `/prep-sheet`. |
@@ -70,10 +70,13 @@ model) — read it for anything this file doesn't cover.
   and before correcting a value. It covers the three-layer model (`source/` → `template/` →
   `resumes/`), preserving historical documents as written, keeping truth in the two canonical
   files and generating the rest, evidence tiers, and the extraction and correction procedures.
-- **Cardinal rule:** only use facts that exist in `fact-bank.md`. If a JD wants something not
-  in there, either surface the closest real transferable experience or name the gap in an
-  honest-scope note — never manufacture a metric, technology, or claim. Some employers
-  explicitly screen for unreviewed AI output.
+- **Cardinal rule:** only use facts that exist in `fact-bank.md` or `skills-matrix.md` — the
+  two public-claim sources. `accomplishments.yaml` is the deeper evidence layer they're
+  distilled from, not a resume source on its own; a detail that lives only in
+  `accomplishments.yaml` needs to be promoted into `fact-bank.md` before a bullet can use it.
+  If a JD wants something not in there, either surface the closest real transferable experience
+  or name the gap in an honest-scope note — never manufacture a metric, technology, or claim.
+  Some employers explicitly screen for unreviewed AI output.
 - **Disclosure rules, if you need them:** fill in the banner atop `fact-bank.md` for your own
   situation. This pattern exists for anyone whose real work involves things they can't name
   publicly — a classified program, an unreleased product, an NDA'd client, a codename. The

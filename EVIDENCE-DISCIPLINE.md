@@ -40,16 +40,21 @@ session summaries, certificates.
 
 ### `template/` — canonical
 
-Two files hold truth, and they hold different kinds:
+Three files hold truth, in two layers:
 
 | File | Role | Contains |
 |---|---|---|
 | `fact-bank.md` | **Selection** layer | Curated, disclosure-clean bullets, reframed per role |
+| `skills-matrix.md` | **Selection** layer | Curated, disclosure-clean skill lines, reframed per role |
 | `accomplishments.yaml` | **Depth** layer | Structured entries with metrics, `confirm:` flags, `evidence:` pointers into `source/` |
 
-**Keep truth in these two files and generate everything else.** A "master full resume" is a
+**Keep truth in these files and generate everything else.** A "master full resume" is a
 rendering produced on demand. When the same fact lives in two maintained places, the copies
-drift quietly, and the drift surfaces only when something ships wrong.
+drift quietly, and the drift surfaces only when something ships wrong. The depth layer is not
+itself a resume source — a metric or detail that lives only in `accomplishments.yaml` needs to
+be promoted into `fact-bank.md` (or `skills-matrix.md`) before a bullet can cite it, and it
+needs to actually be corroborated by its own `evidence:` pointer first, not just copied forward
+because it's already written down somewhere.
 
 ### `resumes/` — rendered
 
@@ -163,7 +168,8 @@ fine to publish as-is. Internal nicknames belong in conversation.
 Before a fact reaches a resume:
 
 - [ ] Traceable to `source/`, or explicitly tagged verbal
-- [ ] Present in `fact-bank.md` or `accomplishments.yaml`
+- [ ] Present in `fact-bank.md` or `skills-matrix.md` (a detail that lives only in
+  `accomplishments.yaml` isn't enough on its own — promote it into one of those two first)
 - [ ] Evidence tier known, and labelled if self- or company-reported
 - [ ] Disclosure rules applied, if you have any: generic descriptors, sensitive specifics vague
 - [ ] Shaky numbers carry a `confirm:` flag
