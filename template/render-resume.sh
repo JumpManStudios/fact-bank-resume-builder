@@ -6,12 +6,27 @@
 # Every render path (/tailor-resume, /cover-letter, re-renders, the review loop)
 # should go through this wrapper instead of calling pandoc directly.
 #
-# Usage: template/render-resume.sh <input.md> <output.docx>
+# Usage: template/render-resume.sh <input.md> <output.docx> [reference.docx]
+#
+# The optional third argument picks the pandoc style carrier. Precedence is
+# 3rd arg, then $RESUME_REFERENCE_DOC, then reference.docx. The env var is there
+# so a whole session can switch carriers without touching any call site.
 set -euo pipefail
 
-IN="${1:?usage: render-resume.sh <input.md> <output.docx>}"
-OUT="${2:?usage: render-resume.sh <input.md> <output.docx>}"
+USAGE="usage: render-resume.sh <input.md> <output.docx> [reference.docx]"
+IN="${1:?$USAGE}"
+OUT="${2:?$USAGE}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Reference doc (pandoc style carrier). A bare filename resolves against
+# template/, so callers need not know where this script lives or what the CWD is.
+REF="${3:-${RESUME_REFERENCE_DOC:-$HERE/reference.docx}}"
+[ -f "$REF" ] || REF="$HERE/$(basename "$REF")"
+[ -f "$REF" ] || {
+  echo "reference doc not found: ${3:-${RESUME_REFERENCE_DOC:-reference.docx}}" >&2
+  echo "looked for it as given, and as $HERE/$(basename "$REF")" >&2
+  exit 1
+}
 
 # This repo is used from macOS, Windows (Git Bash), and the Claude Code mobile app,
 # so neither pandoc nor Python can be assumed to live under a fixed name or path.
@@ -52,17 +67,17 @@ done
   exit 1
 }
 
-"$PANDOC" "$IN" --reference-doc "$HERE/reference.docx" -o "$OUT"
+"$PANDOC" "$IN" --reference-doc "$REF" -o "$OUT"
 [ -z "$PY" ] && {
   echo "No working Python 3 found (tried: $PY_CANDIDATES)." >&2
   echo "fix-bullet-spacing.py did not run, so '$OUT' is NOT SHIPPABLE:" >&2
-  echo "  * Microsoft Word will refuse to open it (\"file appears to be" >&2
-  echo "    corrupted\") because pandoc drops the .ttf content-type declaration" >&2
-  echo "    that reference.docx's embedded fonts depend on." >&2
+  echo "  * If the reference doc embeds fonts, Microsoft Word will refuse to open" >&2
+  echo "    it (\"file appears to be corrupted\") because pandoc drops the .ttf" >&2
+  echo "    content-type declaration those embedded fonts depend on." >&2
   echo "  * It also still has pandoc's loose bullet spacing." >&2
   echo "Install Python 3, or run the cleanup by hand before sending the file:" >&2
   echo "  <your-python> template/fix-bullet-spacing.py \"$OUT\"" >&2
   exit 1
 }
 "$PY" "$HERE/fix-bullet-spacing.py" "$OUT"
-echo "[render-resume] wrote: $OUT"
+echo "[render-resume] wrote: $OUT (reference: $(basename "$REF"))"

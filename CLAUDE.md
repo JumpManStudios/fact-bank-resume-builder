@@ -53,9 +53,11 @@ is submitted, its `.md` source moves to `resumes/archive/` and the sent files la
 `resumes/submitted/`.
 
 **Rendering:** never call pandoc directly — always render through
-`template/render-resume.sh <in.md> <out.docx>`, which runs pandoc + `reference.docx` and then
-`fix-bullet-spacing.py` (tightens intra-group bullet spacing so drafts ship pre-cleaned). Setup
-is `pip install -r requirements.txt` (bundles pandoc) or `brew install pandoc`.
+`template/render-resume.sh <in.md> <out.docx> [reference.docx]`, which runs pandoc + a style
+carrier and then `fix-bullet-spacing.py` (tightens intra-group bullet spacing so drafts ship
+pre-cleaned). The optional third argument picks the carrier (precedence: third argument, then
+`$RESUME_REFERENCE_DOC`, then the default `reference.docx`). Setup is
+`pip install -r requirements.txt` (bundles pandoc) or `brew install pandoc`.
 
 Each command's full instructions live in `.claude/commands/*.md`. `template/README.md` has more
 workflow depth (rendering pipeline, the disclosure-discipline rationale, the interview-prep
