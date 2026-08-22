@@ -9,7 +9,7 @@ This folder is the **source of truth** for building tailored resumes.
 | `fact-bank.md` | Master reusable bullets, grouped by theme. Pull facts from here — never invent. |
 | `skills-matrix.md` | Canonical "Technical Skills" lines + which to lead with by role type. |
 | `accomplishments.yaml` | Structured store of real, curated work (bullet + what-I-did + real metric + evidence pointers into `source/`). Feeds interview prep. |
-| `reference.docx` | **Pandoc style carrier.** Not included in this skeleton — see the warning below for how to build one. |
+| `reference.docx` | **Pandoc style carrier** (the default). Not included in this skeleton — see the warning below for how to build one. |
 
 > **⚠️ Building `reference.docx`:** don't build it by copying a submitted resume's `.docx` over
 > a blank one and stripping the text. Generators sometimes hard-set per-run formatting
@@ -100,10 +100,27 @@ template/render-resume.sh "resumes/drafts/md/{{Your-Name}}-{Company}-{Role}-{YYY
   "resumes/drafts/{{Your Name}} {Company}-{Role} Resume {YYYYMMDD}.docx"
 ```
 
-The wrapper does two things: pandoc with `reference.docx` for styling, then
-`fix-bullet-spacing.py` to clean up bullet spacing (see below). This is **deterministic** —
-same markdown + same reference doc = same output every time. The markdown is the source of
-truth: edit the `.md`, re-render, never hand-format the `.docx`.
+The wrapper does two things: pandoc with a style carrier, then `fix-bullet-spacing.py` to clean
+up bullet spacing (see below). This is **deterministic** — same markdown + same reference doc =
+same output every time. The markdown is the source of truth: edit the `.md`, re-render, never
+hand-format the `.docx`.
+
+**Picking a style carrier.** `render-resume.sh` takes an optional third argument:
+
+```
+template/render-resume.sh <input.md> <output.docx> [reference.docx]
+```
+
+Precedence is: the third argument, then the `$RESUME_REFERENCE_DOC` environment variable, then
+the default `reference.docx`. A bare filename (no path) resolves against `template/`, so callers
+don't need to know the script's location or the caller's working directory — a full path works
+too. An unresolvable carrier is a hard error, never a silent fallback to the default; useful if
+you maintain more than one style carrier (e.g. a more compact alternate layout) and want to
+switch per-render or for a whole session via the env var without touching any call site.
+
+**Comparing renders.** `.docx` files are never byte-identical across runs — `docProps/core.xml`
+carries a generation timestamp — so don't diff them directly. Compare the content part instead:
+`zipfile.ZipFile(path).read('word/document.xml')`, hashed or diffed.
 
 **Installing pandoc.** The wrapper prefers a system pandoc on PATH; otherwise it falls back to
 a bundled one:
