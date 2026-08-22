@@ -1,0 +1,123 @@
+# ============================================================================
+# FICTIONAL accomplishment store for the worked example in examples/README.md.
+# Mirrors template/accomplishments.yaml's format/rules, extended with a few more
+# entries so /prep-sheet has something real to match resume bullets against.
+# Deliberately does NOT cover every bullet on the example resume — two bullets
+# are left unmatched on purpose, to demonstrate /prep-sheet's "not yet curated"
+# fallback path (grep source/, flag it) rather than pretending every bullet in
+# a real fact bank is always pre-curated.
+# ============================================================================
+
+accomplishments:
+
+  - id: checkout-service-decomposition
+    title: Decomposed a monolithic checkout flow into independently deployable services
+    bullet: >-
+      Led the decomposition of a monolithic checkout flow into four independently deployable
+      services, cutting deploy-blocking incidents and enabling the payments team to ship
+      independently of the catalog team.
+    what_i_did: >-
+      Mapped the existing checkout monolith's implicit service boundaries, designed the new
+      service contracts (REST + an internal event bus for order-state changes), and led a
+      phased strangler-fig migration so the monolith and new services ran side by side during
+      cutover with no full-system freeze.
+    outcome: >-
+      Payments and catalog teams now deploy independently; a change in one no longer requires
+      coordinating a release with the other.
+    metrics:
+      - "deploy-blocking incidents dropped from ~6/quarter to ~1/quarter"
+      - "migration completed over 3 phases with zero full-checkout outage"
+    confirm:
+      - "exact quarter-over-quarter incident count (pull from the incident tracker export)"
+    evidence:
+      - "source/session-summaries/2026/03/2026-03-09-checkout-decomposition-phase-1.md"
+      - "modules: checkout-service, order-events-bus, pricing-service"
+    themes: [backend, distributed-systems, architecture]
+    good_for: [backend, senior, staff, architecture]
+    interview_notes: >-
+      The "led a real migration without breaking prod" story. Arc: monolith made independent
+      deploys impossible -> mapped boundaries and designed contracts -> phased strangler-fig
+      cutover -> two teams now ship independently. Good answer to "tell me about a system you
+      redesigned."
+
+  - id: idempotent-payment-processing
+    title: Designed idempotent payment endpoints backed by an event bus
+    bullet: >-
+      Designed idempotent payment-processing endpoints backed by an event bus for order-state
+      changes, so retried and duplicate requests during network failures never double-charge a
+      customer.
+    what_i_did: >-
+      Added idempotency-key handling to the payment-submission API, moved order-state
+      transitions onto an event bus instead of synchronous in-process calls, and wrote a
+      reconciliation job to catch and auto-resolve any state drift between the ledger and the
+      event log.
+    outcome: >-
+      Duplicate-charge incidents from client retries during network blips dropped to
+      effectively zero; the reconciliation job now runs as a routine safety net rather than an
+      incident-response tool.
+    metrics:
+      - "zero confirmed duplicate-charge incidents in the 12 months since rollout"
+    confirm:
+      - "exact pre-rollout duplicate-charge incident rate, if it's worth citing"
+    evidence:
+      - "source/session-summaries/2026/05/2026-05-11-idempotent-payment-endpoints.md"
+      - "modules: payment-service, order-events-bus, ledger-reconciler"
+    themes: [backend, payments, reliability]
+    good_for: [backend, senior, payments]
+    interview_notes: >-
+      Good answer to "tell me about a tricky distributed-systems bug/design problem." Arc:
+      retries during flaky networks risked double-charging -> idempotency keys + event-sourced
+      state + a reconciliation safety net -> duplicate charges effectively eliminated.
+
+  - id: settlement-pipeline-migration
+    title: Migrated merchant settlement from nightly batch to near-real-time
+    bullet: >-
+      Led migration of the settlement job from a nightly batch process to a near-real-time
+      pipeline, cutting merchant payout latency from once daily to under two hours.
+    what_i_did: >-
+      Replaced the nightly cron-driven settlement batch with an event-driven pipeline that
+      settles transactions in small windows throughout the day, including backfill tooling and
+      a shadow-run period to validate parity against the old batch output before cutover.
+    outcome: >-
+      Merchants see settled funds same-day instead of next-day; the shadow-run period caught
+      two edge cases in refund handling before they reached production.
+    metrics:
+      - "payout latency: ~24h (nightly batch) -> under 2h (near-real-time)"
+      - "2-week shadow-run period with zero settlement discrepancies at cutover"
+    confirm: []
+    evidence:
+      - "source/session-summaries/2026/07/2026-07-06-settlement-pipeline-migration.md"
+      - "modules: settlement-pipeline, ledger-reconciler"
+    themes: [backend, payments, migrations]
+    good_for: [backend, senior, payments, architecture]
+    interview_notes: >-
+      Good answer to "tell me about a migration you ran carefully." Arc: nightly batch meant
+      next-day payouts and a large blast radius per run -> event-driven near-real-time pipeline
+      with a shadow-run validation period -> same-day payouts, caught bugs before they shipped.
+
+  - id: observability-rollout
+    title: Rolled out structured logging and distributed tracing across the service fleet
+    bullet: >-
+      Introduced structured logging and distributed tracing across the service fleet, cutting
+      average incident diagnosis time roughly in half.
+    what_i_did: >-
+      Standardized on structured (JSON) logging with a shared request-ID propagated across
+      service boundaries, instrumented the checkout and payments services with distributed
+      tracing, and built a small set of dashboards for the on-call rotation's most common
+      failure modes.
+    outcome: >-
+      On-call engineers can trace a failing request across the full service fleet instead of
+      grepping individual service logs by hand; average time-to-diagnosis for payments-critical
+      incidents dropped noticeably.
+    metrics:
+      - "qualitative — on-call engineers report diagnosis time 'roughly halved' since rollout"
+    confirm:
+      - "a real before/after diagnosis-time number, if the incident tracker has one"
+    evidence:
+      - "source/session-summaries/2026/08/2026-08-03-observability-rollout.md"
+    themes: [backend, reliability, platform]
+    good_for: [backend, senior, platform, reliability]
+    interview_notes: >-
+      Good answer to "tell me about improving on-call." Arc: incidents meant grepping logs
+      service by service -> structured logs + a shared request ID + distributed tracing +
+      on-call dashboards -> materially faster diagnosis.

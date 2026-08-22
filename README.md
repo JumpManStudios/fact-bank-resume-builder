@@ -40,6 +40,9 @@ and `template/accomplishments.yaml`). Every resume, cover letter, and interview-
 6. **Track everything in `job-listings/PIPELINE.md`** — one row per role, status kept current
    in place, closed rows kept forever as your record.
 
+Not sure this actually produces something real? See **[`examples/`](examples/)** — one
+fictional job application walked through the entire chain, every artifact committed as proof.
+
 ## What's genuinely reusable here
 
 - **The fact-bank pattern** — one curated file selects and reframes bullets per role; nothing
@@ -112,9 +115,11 @@ npm run selftest -- "graphql"      # smoke test, no MCP client needed
 ```
 
 The repo-root `.mcp.json` registers it for Claude Code; restart/reconnect MCP to pick it up. In this
-skeleton `source/` is empty, so it builds an empty-but-functional index — fill in your own facts (or the
-worked example) and it has something to search. See `mcp/resume-curator/README.md` for details, including
-why its raw output stays private.
+skeleton `source/` is empty, so it builds an empty-but-functional index — fill in your own facts (or see
+[`examples/`](examples/), which has a filled-in `source/` and shows real `search_backlog` /
+`search_accomplishments` / `find_evidence` output against it, `RESUME_REPO_ROOT` and all) and it has
+something to search. See `mcp/resume-curator/README.md` for details, including why its raw output stays
+private.
 
 ## License
 
