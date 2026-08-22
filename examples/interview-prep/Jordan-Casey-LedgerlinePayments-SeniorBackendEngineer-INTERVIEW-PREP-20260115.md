@@ -3,7 +3,8 @@ FICTIONAL interview prep sheet — Step 5 (/prep-sheet) output in the worked exa
 examples/resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260115.md against
 examples/template/accomplishments.yaml. See examples/README.md for the full walkthrough.
 
-Note on scope: the resume's "What I bring" bullets are higher-level restatements of the
+Note on scope: per prep-sheet.md's "Deduplicate 'What I bring' against Experience before
+matching" guidance, the resume's "What I bring" bullets are higher-level restatements of the
 Experience-section bullets below rather than separate claims, so this sheet builds one section
 per Experience bullet (the more specific, more probeable version of each claim) instead of
 duplicating near-identical sections for both. The Honest scope note is included since it's

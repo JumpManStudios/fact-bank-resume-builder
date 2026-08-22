@@ -15,6 +15,18 @@ every example on it cold — without "what was that again?".
 1. The resume — extract the concrete claims: the "What I bring" bullets and every Experience
    bullet. (Skip generic header/summary lines unless they make a specific claim.)
 2. `template/accomplishments.yaml` — the structured store of already-curated real work.
+3. `template/fact-bank.md` — specifically its disclosure banner, if it has one (see Rules
+   below).
+
+## Deduplicate "What I bring" against Experience before matching
+Under the house style, a "What I bring" bullet is usually a compressed restatement of one or
+more Experience-section bullets, not a separate claim — e.g. "Design for failure, not just the
+happy path" restating the Experience bullet about idempotent payment endpoints. Build **one
+prep section per underlying claim, not one per bullet on the page**: if a "What I bring" bullet
+and an Experience bullet are the same story at two levels of detail, cover it once (use the
+Experience-section version — it's more specific and more probeable) rather than duplicating a
+near-identical section for both. Only give a "What I bring" bullet its own section when it
+makes a claim no Experience bullet covers.
 
 ## For each concrete bullet on the resume
 Match it to the best record in `accomplishments.yaml` (by meaning, not exact words).
@@ -30,7 +42,8 @@ Match it to the best record in `accomplishments.yaml` (by meaning, not exact wor
 ## Output
 Write to `interview-prep/<Company>-<Role>-INTERVIEW-PREP-<YYYYMMDD>.md` (create the
 `interview-prep/` folder if needed; today's date). Keep it TIGHT — this is a cheat-sheet, not a
-document. One section per bullet:
+document. One section per underlying claim after deduplicating "What I bring" against
+Experience:
 
 ```
 # Interview Prep — <Company> <Role> (<date>)
