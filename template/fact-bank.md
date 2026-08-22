@@ -47,23 +47,17 @@ and RE-FRAMING bullets from this file toward the target job description.
 
 ## Summary kit (ASSEMBLE — don't rewrite from scratch)
 
-Build the Summary by combining: **[optional OPENER] + CORE (fixed) + one EMPHASIS clause tuned
-to the role + [optional additional line for a specialty] + [optional MISSION line].** Light
-tailoring only — the core stays put. This assemble-don't-rewrite discipline is what keeps every
-resume in the same voice while still reading tailored.
+Build the Summary as: **CORE (fixed) with one EMPHASIS clause dropped into it, tuned to the
+role, + [optional additional line for a specialty] + [optional MISSION line].** No opener — see
+"Resume house style" below. Light tailoring only — the Core stays put, and the only slot that
+moves per resume is the emphasis clause.
 
 ### Core (write once, keep ~verbatim across every resume)
 > {{2-4 sentences establishing who you are professionally: years of experience, your core
-> competency, and one concrete anchor — a current role, a flagship project, a notable scale.
-> This is the one paragraph every resume shares; tailoring happens in the clauses around it,
-> not by rewriting this each time.}}
-
-### Opener (pick 0–1 — sets the tone)
-- **Plain:** omit the opener; start with the Core. Straightforward, safe default.
-- **Signature hook:** {{one punchy line that captures your professional identity in a single
-  image or contrast — write this once, reuse it}}
-- **JD-echo:** one line echoing the posting, e.g. "For N years I've done exactly what this role
-  describes." Strongest when you lift or paraphrase a phrase straight from the JD.
+> competency, and one concrete anchor — a current role, a flagship project, a notable scale. One
+> sentence should carry a slot for the emphasis clause below. This is the one paragraph every
+> resume shares; tailoring happens in the clause dropped into it, not by rewriting this each
+> time.}}
 
 ### Emphasis clause (swap the ONE clause matching the role's focus)
 - **{{Role type 1, e.g. Backend / API}}:** {{clause}}
@@ -76,10 +70,44 @@ resume in the same voice while still reading tailored.
 > AI/tooling practice, a domain specialty, a leadership scope. Keep this modular so it's easy
 > to include or drop per resume.}}
 
-### Mission line (fill the {Company} clause, or drop if there's no honest hook)
+### Mission line (OFF by default — include only for a genuinely strong, honest hook)
+A generic "I admire your mission" line reads as filler and costs more than it earns; only add
+one when the tie is real, specific, and would survive a skeptical read. See "Company-specific
+hooks" (if you've added that section) for a canonical place to keep the real, verifiable
+connections this line draws from.
 - **{{Industry pattern 1}}:** {{a genuine personal angle tied to that industry — only use if
   it's actually true}}
 - **Other:** tie an honest personal angle to {Company}'s mission, or omit — don't force it.
+
+---
+
+## Resume house style (BINDING — applies to every generated resume)
+
+These are not suggestions — a generated draft that violates them is not finished. The goal is a
+resume that reads like a person wrote it once and meant it, not one visibly assembled to hit
+every keyword in the posting. Tune the specific numbers in rule 5 to your own voice and target
+page count; the discipline of having ONE binding default instead of re-deciding style per resume
+is the part worth keeping.
+
+1. **Bullets are two sentences, not one em-dash chain.** Write `**Bold lead-in.** A complete
+   sentence carrying the evidence.` — a period after the lead-in, never ` — ` continuing into a
+   trailing clause. The dash-continuation form is one of the most recognizable AI-text tells,
+   and some employers explicitly screen for it.
+2. **No opener, no throat-clearing.** The Summary starts on the Core's first word. Never open a
+   resume by restating what the role asks for ("This role calls for someone who…", "For years
+   I've done exactly what this posting describes…").
+3. **No meta-commentary explaining a bullet's relevance.** Cut every "…the same kind of work
+   this role describes" / "…which is exactly what this posting is looking for." State the fact
+   and let the reader draw the line themselves.
+4. **A default section shape** — pick the sections that always appear (Summary · What I bring ·
+   Technical Skills · Experience · Education/Certifications is a proven default) and make
+   Projects / Honest scope notes **off by default**, added back only when a specific role earns
+   them (a real hook for Projects, a Flag worth pre-empting for Honest scope notes).
+5. **A target word count and bullet count**, so length is checkable instead of asserted.
+   {{~900-1,100}} words and {{~20-25}} bullets total is a reasonable starting point for a
+   one-to-two-page resume — pick numbers that fit your own target length. If a draft runs long,
+   cut whole bullets rather than shortening every bullet into a stub; the strongest three
+   bullets in a sub-section beat five average ones.
 
 ---
 
@@ -95,7 +123,8 @@ Context line (reframe per role):
 > line that gets lightly reworded per resume to match the target role's emphasis}}
 
 ### Theme: {{e.g. "Backend systems, APIs & architecture"}}
-- {{Bullet — specific, real, with a metric where you have one. Lead with the verb and the
+- {{Bullet — two sentences per the Resume house style above: "**Bold lead-in.** Evidence
+  sentence." Specific, real, with a metric where you have one. Lead with the verb and the
   outcome, not the task.}}
 - {{Bullet}}
 - {{Bullet}}
@@ -112,7 +141,7 @@ Context line (reframe per role):
      bullet traceable to source/ and, ideally, mirrored in accomplishments.yaml with the real
      metric and evidence pointer — see EVIDENCE-DISCIPLINE.md. -->
 
-## Honest scope notes (library — pick 2-3 per resume that match the JD's likely gaps)
+## Honest scope notes (library — OFF by default per house style; pick 2-3 only when a Flag earns it)
 
 <!-- Pre-empting a real gap reads as senior candor, not weakness. Write these once, each
      naming a specific gap plus the closest real adjacent experience, so /tailor-resume can

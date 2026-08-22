@@ -105,3 +105,23 @@ tell — don't contort those to avoid it.
 
 If avoiding em dashes would force a clunkier or less accurate sentence, clarity and accuracy
 win — this is a style default, not a hard ban.
+
+### Resume house style (binding — don't wait to be asked for it)
+
+A resume that gets tightened and re-tightened every time it's generated is a sign the default
+needs codifying, not re-litigating per draft. **Full rules live in the "Resume house style"
+section of `template/fact-bank.md`; `/tailor-resume` enforces them and self-checks against them
+before writing the file.** The short version:
+
+- **Bullets are two sentences:** `**Bold lead-in.** Evidence sentence.` A period after the
+  lead-in, never ` — ` running into a trailing clause. This supersedes the note above about
+  dash lead-ins being fine in resume bullets specifically — it's still true for prose, but the
+  house style below is more specific and wins for "What I bring" / Experience bullets.
+- **No opener on the Summary.** It starts on the Core's first word. Never open by restating what
+  the posting asks for.
+- **No meta-commentary** explaining why a bullet is relevant to the role. State the fact and
+  stop.
+- **A default section shape**, with the optional sections off unless the specific role earns
+  them back.
+- **A target word/bullet count**, so length is a visible, checkable number instead of "however
+  long it came out."
