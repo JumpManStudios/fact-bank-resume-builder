@@ -1,6 +1,6 @@
 <!--
 FICTIONAL interview prep sheet — Step 5 (/prep-sheet) output in the worked example. Built from
-examples/resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260115.md against
+examples/resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260815.md against
 examples/template/accomplishments.yaml. See examples/README.md for the full walkthrough.
 
 Note on scope: per prep-sheet.md's "Deduplicate 'What I bring' against Experience before
@@ -11,29 +11,34 @@ duplicating near-identical sections for both. The Honest scope note is included 
 squarely something the candidate needs to speak to if it comes up.
 -->
 
-# Interview Prep — Ledgerline Payments Senior Backend Engineer (2026-01-15)
-Source resume: `examples/resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260115.md`
+# Interview Prep — Ledgerline Payments Senior Backend Engineer (2026-08-15)
+Source resume: `examples/resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260815.md`
 
 ## "Decomposed a monolithic checkout flow into four independently deployable services. The payments and catalog teams now ship independently of each other, removing the cross-domain coupling that had caused deploy-blocking incidents."
 - **What I did:** Mapped the checkout monolith's implicit service boundaries, designed the new
-  service contracts (REST + an internal event bus for order-state changes), and led a phased
-  strangler-fig migration so the monolith and new services ran side by side during cutover with
-  no full-system freeze.
+  service contracts (REST + an internal event bus for order-state changes), and led a
+  three-phase strangler-fig migration (pricing/inventory in March, order-service in May,
+  payment-service — the last domain — in August) so the monolith and new services ran side by
+  side during each cutover with no full-system freeze.
 - **Real metric:** pre-migration deploy-blocking incidents averaged ~6/quarter over the prior
-  three quarters. The post-migration count still needs confirming before it can be claimed.
+  three quarters. The post-migration count still isn't pulled as of the August completion — the
+  final phase only shipped that week, so there's no stable window yet to measure against.
 - **If they dig deeper:** `source/session-summaries/2026/03/2026-03-09-checkout-decomposition-phase-1.md`
-  (checkout decomposition planning + phase 1); modules `checkout-service`, `order-events-bus`.
+  (planning + phase 1) and `source/session-summaries/2026/08/2026-08-10-checkout-decomposition-complete.md`
+  (phases 2–3, completion); modules `checkout-service`, `order-events-bus`, `pricing-service`,
+  `inventory-service`, `order-service`, `payment-service`.
 - **30-sec arc:** monolith made independent team deploys impossible → mapped boundaries and
-  designed contracts → phased strangler-fig cutover with no full freeze → two teams now ship
-  independently.
+  designed contracts → three-phase strangler-fig cutover over five months with no full freeze →
+  all four domains now ship independently.
 
 ## "Designed idempotent payment-processing endpoints backed by an event bus for order-state changes. A companion reconciliation job catches any ledger drift, so retried and duplicate requests during network failures never double-charge a customer."
 - **What I did:** Added idempotency-key handling to the payment-submission API, moved
   order-state transitions onto an event bus instead of synchronous in-process calls, and wrote
   a reconciliation job to catch and auto-resolve any state drift between the ledger and the
   event log.
-- **Real metric:** zero confirmed duplicate-charge incidents in the 12 months since rollout.
-  (confirm: exact pre-rollout duplicate-charge rate, if worth citing)
+- **Real metric:** no confirmed duplicate-charge incidents in the ~2 months since rollout
+  (informal check). (confirm: exact pre-rollout duplicate-charge rate, if worth citing; also a
+  hard export over a longer post-rollout window)
 - **If they dig deeper:** `source/session-summaries/2026/05/2026-05-11-idempotent-payment-endpoints.md`
   (idempotency-key design + rollout); modules `payment-service`, `order-events-bus`,
   `ledger-reconciler`.
@@ -126,8 +131,9 @@ Source resume: `examples/resumes/drafts/md/Jordan-Casey-LedgerlinePayments-Senio
 ## Gaps to shore up before the interview
 - Confirm the post-migration deploy-blocking-incident count from the incident tracker export
   before making any before/after claim verbally.
-- Confirm the pre-rollout duplicate-charge rate for the idempotent-payments story, if it's worth
-  citing as a before/after number.
+- Confirm the pre-rollout duplicate-charge rate for the idempotent-payments story, and pull a
+  hard export over a longer post-rollout window — the current "~2 months, informal check"
+  figure is honest but thin.
 - Confirm the real before/after change-lead-time numbers for the CI/CD rebuild before repeating
   "days to hours" in an interview.
 - Confirm a real before/after diagnosis-time number for the observability rollout, if the
