@@ -24,7 +24,7 @@ start here — then go read the commands that produced each file.
 
 | Step | Command | Input | Output |
 |---|---|---|---|
-| 0 | *(setup — not a command)* | — | [`template/fact-bank.md`](template/fact-bank.md), [`template/accomplishments.yaml`](template/accomplishments.yaml), [`source/session-summaries/`](source/session-summaries/) — a filled-in fact bank + accomplishment store + evidence layer for Jordan Casey, standing in for your own filled-in `template/` and `source/` |
+| 0 | *(setup — not a command)* | — | [`template/fact-bank.md`](template/fact-bank.md), [`template/skills-matrix.md`](template/skills-matrix.md), [`template/accomplishments.yaml`](template/accomplishments.yaml), [`source/session-summaries/`](source/session-summaries/) — a filled-in fact bank + skills matrix + accomplishment store + evidence layer for Jordan Casey, standing in for your own filled-in `template/` and `source/` (`resume-template.md`/`cover-letter-template.md` are pure structure, so this example reuses the root ones rather than duplicating them) |
 | 1 | `/jd-to-md` | a fictional job-posting PDF | [`job-listings/ledgerline-payments-senior-backend-engineer.md`](job-listings/ledgerline-payments-senior-backend-engineer.md) |
 | 2 | `/screen-jd` | the JD above | folded into [`job-listings/PIPELINE.md`](job-listings/PIPELINE.md) (`/screen-jd`'s output is a chat reply plus a pipeline update, not a standalone file — see that file's "Role detail" section for the verdict) |
 | 3 | `/tailor-resume` | the JD + fact bank | [`resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260115.md`](resumes/drafts/md/Jordan-Casey-LedgerlinePayments-SeniorBackendEngineer-20260115.md) |
@@ -43,15 +43,23 @@ pointing back here.
   generated cover letter — check for yourself.
 - **The screen (step 2)** renders an honest **"Real stretch (worth it)"** verdict, not a
   reflexive "Strong fit." The Kubernetes gap is real and named, not glossed over.
-- **The resume (step 3)** follows `fact-bank.md`'s binding house style: two-sentence bullets, no
-  Summary opener, no meta-commentary tying a bullet back to the JD, the default five-section
-  shape — **plus** the "Honest scope notes" section turned back **on**, because this specific
-  JD's Kubernetes requirement earns it back (house style keeps it off by default otherwise).
-  Every claim on it traces to `template/fact-bank.md` or `template/accomplishments.yaml` —
-  nothing here was invented to fit the posting. At 662 words / 20 bullets it also runs under
-  the fact bank's own ~900–1,100 word target, which is a fair thing to notice: the target is a
-  ceiling against bloat, not a floor to pad up to, and a single-employer, focused background
-  doesn't need padding to hit a number.
+- **The resume (step 3)** follows `fact-bank.md`'s binding house style: two-sentence bullets in
+  every "What I bring" **and** Experience entry (`**Bold lead-in.** Evidence sentence.`, not an
+  em-dash chain), no Summary opener, no meta-commentary tying a bullet back to the JD, the
+  default five-section shape — **plus** the "Honest scope notes" section turned back **on**,
+  because this specific JD's Kubernetes requirement earns it back (house style keeps it off by
+  default otherwise). Every claim on it traces to `template/fact-bank.md` or
+  `template/skills-matrix.md` — `template/accomplishments.yaml`'s richer detail (the
+ok,   reconciliation job and the shadow-run validation) had to be promoted into `fact-bank.md`
+  itself before a bullet could use them, since `accomplishments.yaml`
+  is the deeper evidence layer, not a direct resume source. (`skills-matrix.md` isn't literally
+  named by the cardinal rule's current wording, which only says "fact-bank.md" — that's a real
+  gap in the rule text, tracked separately as #29; this example follows what `/tailor-resume`'s
+  own steps already require in practice, which is a skills-matrix source.) At 636 rendered
+  words (`pandoc ... -t plain | wc -w`, not the raw `.md` file's word count, which is inflated
+  by the top HTML comment) / 20 bullets, it runs a bit under the fact bank's own ~900–1,100
+  word target — an honest miss worth naming rather than a deliberate "ceiling, not a floor"
+  policy that isn't actually written down anywhere.
 - **The cover letter (step 4)** has no personal connection to Ledgerline Payments to draw on
   (it's fictional), so paragraph 3 uses the template's honest fallback path — the grounded
   professional case for the role — instead of manufacturing a fake personal hook. That's the

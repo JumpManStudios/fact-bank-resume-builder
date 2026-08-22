@@ -18,6 +18,7 @@ the live slash commands; it exists only so this walkthrough is reproducible and 
   any resume; only worth naming if a JD's Flags raise it.
 - **Certifications:** AWS Certified Solutions Architect – Associate — certified March 2023,
   valid through March 2026
+- **Education:** B.S. Computer Science, University of Texas at Austin (2017)
 
 ## Title-line options (pick/reframe per role)
 - Senior Backend Engineer — Payments · Distributed Systems · API Architecture
@@ -66,27 +67,28 @@ Context line:
 > Python/Go service fleet handling tens of millions of dollars in monthly transaction volume.
 
 ### Theme: Checkout & payments architecture
-- Decomposed a monolithic checkout flow into four independently deployable services, cutting
-  deploy-blocking incidents and letting the payments and catalog teams ship independently of
-  each other.
-- Designed idempotent payment-processing endpoints backed by an event bus for order-state
-  changes, so retried and duplicate requests during network failures never double-charge a
-  customer.
-- Led migration of the settlement job from a nightly batch process to a near-real-time pipeline,
-  cutting merchant payout latency from once daily to under two hours.
+- **Decomposed a monolithic checkout flow into four independently deployable services.**
+  The payments and catalog teams now ship independently of each other, removing the
+  cross-domain coupling that had caused deploy-blocking incidents.
+- **Designed idempotent payment-processing endpoints backed by an event bus for order-state
+  changes.** A companion reconciliation job catches any ledger drift, so retried and duplicate
+  requests during network failures never double-charge a customer.
+- **Led migration of the settlement job from a nightly batch process to a near-real-time
+  pipeline.** Validated with a two-week shadow run before cutover, the change cut merchant
+  payout latency from once daily to under two hours.
 
 ### Theme: Platform reliability & delivery
-- Rebuilt the checkout team's CI/CD pipeline around trunk-based development and automated
-  canary rollouts, cutting the average change lead time from days to hours.
-- Introduced structured logging and distributed tracing across the service fleet, cutting
-  average incident diagnosis time roughly in half.
+- **Rebuilt the checkout team's CI/CD pipeline around trunk-based development and automated
+  canary rollouts.** Average change lead time dropped from days to hours.
+- **Introduced structured logging and distributed tracing across the service fleet.** Average
+  incident diagnosis time dropped roughly in half.
 
 ### Theme: Technical leadership & mentorship
-- Mentor two mid-level engineers through design review and pairing, both of whom have since led
+- **Mentor two mid-level engineers through design review and pairing.** Both have since led
   their own service migrations independently.
-- Represent the backend team in cross-functional architecture reviews with product and platform
-  engineering, translating system constraints into tradeoffs a non-engineering audience can
-  weigh in on.
+- **Represent the backend team in cross-functional architecture reviews with product and
+  platform engineering.** I translate system constraints into tradeoffs a non-engineering
+  audience can weigh in on.
 
 <!-- Add a "Theme:" block per employer, or per major project within a long tenure. -->
 
